@@ -108,7 +108,7 @@
   <!-- ============================== DEUTSCH ============================== -->
   <section data-lang="de" class="active">
   <h1>Benutzerhandbuch</h1>
-  <p class="updated">Stand: 18. Oktober 2026</p>
+  <p class="updated">Stand: 2. November 2026</p>
 
   <p>Dieses Handbuch führt einmal komplett durch die App – vom Anlegen des ersten Objekts bis zum fertigen PDF der Betriebskostenabrechnung. Jeder Bildschirm und jedes Eingabefeld wird an der Stelle erklärt, an der es zum ersten Mal vorkommt.</p>
 
@@ -293,6 +293,8 @@
   </dl>
   <div class="note"><strong>Wichtig:</strong> Die Tarifoptionen einer Kostenart müssen den gesamten Abrechnungszeitraum lückenlos und ohne Überschneidung abdecken – sonst kann die Abrechnung nicht berechnet werden. Die App verhindert Lücken, Überschneidungen und doppelte Startdaten bereits bei der Eingabe. Erfassen Sie einen neuen Tarif, während der vorherige noch unbefristet läuft, wird dieser beim Speichern automatisch auf den Vortag begrenzt.</div>
 
+  <div class="note"><strong>Zähler mit Hoch- und Niedertarif (HT/NT):</strong> Innerhalb einer Kostenart gibt es keine gleichzeitig geltenden Tarifzonen. Hat ein Zähler zwei Zählwerke (HT und NT) mit unterschiedlichen Arbeitspreisen, legen Sie dafür <strong>zwei getrennte verbrauchsbasierte Kostenarten</strong> an, z. B. „Allgemeinstrom HT“ und „Allgemeinstrom NT“ (<strong>Objekt → Kostenarten</strong>, Berechnungsart „Verbrauchsbasiert“, Einheit kWh, derselbe Verteilerschlüssel). Erfassen Sie bei jeder Kostenart die <a href="#zaehlerstaende-de">Zählerstände</a> des jeweiligen Zählwerks und pflegen Sie bei jeder den eigenen Arbeitspreis in den Tarifoptionen. In der Abrechnung erscheinen beide als eigene Zeilen; ihre Summe sind die Gesamtkosten des Zählers. <strong>Den Grundpreis tragen Sie nur bei einer der beiden Kostenarten ein</strong> (bei der anderen bleibt er 0) – er fällt für den Zähler nur einmal an und würde sonst doppelt abgerechnet. Die Katalog-Kostenart „Allgemeinstrom“ können Sie für ein Zählwerk weiterverwenden und das andere als eigene Kostenart ergänzen.</div>
+
   <h2 id="zaehlerstaende-de">Zählerstände erfassen</h2>
   <p>Zählerstände finden Sie gebündelt unter <strong>Objekt → Zählerstände</strong>. Es gibt zwei Arten – welche relevant ist, hängt davon ab, wie die Kostenart eingestellt ist:</p>
   <ul>
@@ -415,7 +417,7 @@
   <!-- ============================== ENGLISH ============================== -->
   <section data-lang="en">
   <h1>User Guide</h1>
-  <p class="updated">Last updated: October 18, 2026</p>
+  <p class="updated">Last updated: November 2, 2026</p>
 
   <p>This guide walks through the entire app – from creating your first property to the finished PDF of the utility cost statement (German: <em>Betriebskostenabrechnung</em>). Every screen and every input field is explained where it first appears.</p>
 
@@ -600,6 +602,8 @@
   </dl>
   <div class="note"><strong>Important:</strong> The tariff options of a cost type must cover the entire statement period without gaps or overlaps – otherwise the statement cannot be calculated. The app prevents gaps, overlaps, and duplicate start dates during entry. If you add a new tariff while the previous one is still open-ended, it is automatically limited to the preceding day when you save.</div>
 
+  <div class="note"><strong>Meters with peak and off-peak registers (HT/NT):</strong> Within a single cost type there are no simultaneously valid tariff zones. If a meter has two registers (peak and off-peak) with different consumption prices, create <strong>two separate consumption-based cost types</strong> for it, e.g. "Common area electricity peak" and "Common area electricity off-peak" (<strong>Property → Cost types</strong>, calculation method "Consumption-based", unit kWh, same allocation key). For each cost type, record the <a href="#zaehlerstaende-en">meter readings</a> of its own register and maintain its own consumption price in the tariff options. In the statement both appear as separate lines; their sum is the total cost of the meter. <strong>Enter the base price for only one of the two cost types</strong> (leave it at 0 for the other) – it is incurred only once for the meter and would otherwise be charged twice. You can keep using the catalog cost type "Common area electricity" for one register and add the other as a custom cost type.</div>
+
   <h2 id="zaehlerstaende-en">Recording meter readings</h2>
   <p>Meter readings are collected under <strong>Property → Meter readings</strong>. There are two kinds – which one is relevant depends on how the cost type is configured:</p>
   <ul>
@@ -722,7 +726,7 @@
   <!-- ============================== FRANÇAIS ============================== -->
   <section data-lang="fr">
   <h1>Guide d'utilisation</h1>
-  <p class="updated">Dernière mise à jour : 18 octobre 2026</p>
+  <p class="updated">Dernière mise à jour : 2 novembre 2026</p>
 
   <p>Ce guide vous accompagne à travers l'intégralité de l'application – de la création de votre premier bien jusqu'au PDF final du décompte de charges (en allemand : <em>Betriebskostenabrechnung</em>). Chaque écran et chaque champ de saisie est expliqué à l'endroit où il apparaît pour la première fois.</p>
 
@@ -906,6 +910,8 @@
     <dd>Nom du fournisseur, pour votre seule information.</dd>
   </dl>
   <div class="note"><strong>Important :</strong> les options tarifaires d'un type de charge doivent couvrir l'intégralité de la période du décompte, sans lacune ni chevauchement – sinon le décompte ne peut pas être calculé. L'application empêche les lacunes, les chevauchements et les dates de début en double dès la saisie. Si vous enregistrez un nouveau tarif alors que le précédent est encore à durée indéterminée, celui-ci est automatiquement limité à la veille lors de l'enregistrement.</div>
+
+  <div class="note"><strong>Compteurs à heures pleines et heures creuses (HP/HC) :</strong> au sein d'un même type de charge, il n'existe pas de zones tarifaires simultanées. Si un compteur possède deux cadrans (heures pleines et heures creuses) avec des prix à la consommation différents, créez pour cela <strong>deux types de charges distincts basés sur la consommation</strong>, par ex. « Électricité des parties communes HP » et « Électricité des parties communes HC » (<strong>Bien → Types de charges</strong>, méthode de calcul « Basé sur la consommation », unité kWh, même clé de répartition). Pour chaque type de charge, saisissez les <a href="#zaehlerstaende-fr">relevés de compteur</a> du cadran correspondant et gérez son propre prix à la consommation dans les options tarifaires. Dans le décompte, les deux apparaissent sur des lignes distinctes ; leur somme correspond au coût total du compteur. <strong>Ne saisissez le prix de base que pour l'un des deux types de charges</strong> (laissez-le à 0 pour l'autre) – il n'est dû qu'une fois pour le compteur et serait sinon facturé deux fois. Vous pouvez continuer à utiliser le type de charge du catalogue « Électricité des parties communes » pour un cadran et ajouter l'autre comme type de charge personnalisé.</div>
 
   <h2 id="zaehlerstaende-fr">Saisir les relevés de compteur</h2>
   <p>Les relevés de compteur sont regroupés sous <strong>Bien → Relevés de compteur</strong>. Il en existe deux types – lequel est pertinent dépend de la configuration du type de charge :</p>
