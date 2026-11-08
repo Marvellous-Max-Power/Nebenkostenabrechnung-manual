@@ -108,7 +108,7 @@
   <!-- ============================== DEUTSCH ============================== -->
   <section data-lang="de" class="active">
   <h1>Benutzerhandbuch</h1>
-  <p class="updated">Stand: 7. November 2026 · App-Version 1.0.2</p>
+  <p class="updated">Stand: 7. November 2026 · App-Version 1.1.0</p>
 
   <p>Dieses Handbuch führt einmal komplett durch die App – vom Anlegen des ersten Objekts bis zum fertigen PDF der Betriebskostenabrechnung. Jeder Bildschirm und jedes Eingabefeld wird an der Stelle erklärt, an der es zum ersten Mal vorkommt.</p>
 
@@ -122,6 +122,7 @@
       <li><a href="#kostenarten-de">Kostenarten</a></li>
       <li><a href="#tarife-de">Tarifoptionen</a></li>
       <li><a href="#zaehlerstaende-de">Zählerstände erfassen</a></li>
+      <li><a href="#zaehlerwechsel-de">Zählerwechsel: Tausch, Ausbau und Einbau</a></li>
       <li><a href="#belege-de">Belege erfassen</a></li>
       <li><a href="#abrechnung-de">Eine Abrechnung erstellen</a></li>
       <li><a href="#ergebnis-de">Die fertige Abrechnung &amp; PDF-Export</a></li>
@@ -291,7 +292,7 @@
     <dt>Anbieter (optional)</dt>
     <dd>Name des Versorgers, nur zu Ihrer eigenen Übersicht.</dd>
   </dl>
-  <div class="note"><strong>Wichtig:</strong> Die Tarifoptionen einer Kostenart müssen den gesamten Abrechnungszeitraum lückenlos und ohne Überschneidung abdecken – sonst kann die Abrechnung nicht berechnet werden. Die App verhindert Lücken, Überschneidungen und doppelte Startdaten bereits bei der Eingabe. Erfassen Sie einen neuen Tarif, während der vorherige noch unbefristet läuft, wird dieser beim Speichern automatisch auf den Vortag begrenzt.</div>
+  <div class="note"><strong>Wichtig:</strong> Die Tarifoptionen einer Kostenart müssen den gesamten Abrechnungszeitraum lückenlos und ohne Überschneidung abdecken – sonst kann die Abrechnung nicht berechnet werden. Die App verhindert Lücken, Überschneidungen und doppelte Startdaten bereits bei der Eingabe. Erfassen Sie einen neuen Tarif, während der vorherige noch unbefristet läuft, wird dieser beim Speichern automatisch auf den Vortag begrenzt. <strong>Ausnahme:</strong> Für Zeiten, in denen kein Zähler eingebaut ist (siehe <a href="#zaehlerwechsel-de">Zählerwechsel</a>), werden keine Tarifoptionen verlangt.</div>
 
   <div class="note"><strong>Zähler mit Hoch- und Niedertarif (HT/NT):</strong> Innerhalb einer Kostenart gibt es keine gleichzeitig geltenden Tarifzonen. Hat ein Zähler zwei Zählwerke (HT und NT) mit unterschiedlichen Arbeitspreisen, legen Sie dafür <strong>zwei getrennte verbrauchsbasierte Kostenarten</strong> an, z. B. „Allgemeinstrom HT“ und „Allgemeinstrom NT“ (<strong>Objekt → Kostenarten</strong>, Berechnungsart „Verbrauchsbasiert“, Einheit kWh, derselbe Verteilerschlüssel). Erfassen Sie bei jeder Kostenart die <a href="#zaehlerstaende-de">Zählerstände</a> des jeweiligen Zählwerks und pflegen Sie bei jeder den eigenen Arbeitspreis in den Tarifoptionen. In der Abrechnung erscheinen beide als eigene Zeilen; ihre Summe sind die Gesamtkosten des Zählers. <strong>Den Grundpreis tragen Sie nur bei einer der beiden Kostenarten ein</strong> (bei der anderen bleibt er 0) – er fällt für den Zähler nur einmal an und würde sonst doppelt abgerechnet. Die Katalog-Kostenart „Allgemeinstrom“ können Sie für ein Zählwerk weiterverwenden und das andere als eigene Kostenart ergänzen.</div>
 
@@ -307,13 +308,47 @@
     <dt>Datum</dt>
     <dd>Ablesedatum. Pro Kostenart und Zähler lässt sich nicht zweimal am selben Tag ablesen, da sonst nicht eindeutig wäre, welcher Wert gilt.</dd>
     <dt>Zählerstand</dt>
-    <dd>Der abgelesene Zählerstand – nicht der Verbrauch. Die Einheit (z. B. m³) wird aus der Kostenart übernommen. Den Verbrauch berechnet die App selbst als Differenz zur vorherigen Ablesung.</dd>
+    <dd>Der abgelesene Zählerstand – nicht der Verbrauch. Die Einheit (z. B. m³) wird aus der Kostenart übernommen. Den Verbrauch berechnet die App selbst als Differenz zur vorherigen Ablesung. Innerhalb eines Zählers darf ein Stand nie niedriger sein als der vorherige; bei einem neuen Zähler erfassen Sie einen <a href="#zaehlerwechsel-de">Zählerwechsel</a>.</dd>
     <dt>Zwischenablesung</dt>
     <dd>Nur bei Wohneinheiten-Zählern. Kennzeichnet eine außerplanmäßige Ablesung, typischerweise beim Mieterwechsel, damit der Verbrauch korrekt zwischen altem und neuem Mieter aufgeteilt wird.</dd>
     <dt>Anhang</dt>
     <dd>Optional ein Foto oder eine PDF-Datei des Zählers bzw. Ableseprotokolls zur eigenen Dokumentation.</dd>
   </dl>
   <div class="note">Sobald ein Kalenderjahr finalisiert wurde, lassen sich Zählerstände aus diesem und allen früheren Jahren nicht mehr anlegen, bearbeiten oder löschen – so bleibt eine erstellte Abrechnung nachvollziehbar.</div>
+
+  <h2 id="zaehlerwechsel-de">Zählerwechsel: Tausch, Ausbau und Einbau</h2>
+  <p>Wird ein Zähler getauscht, ausgebaut oder neu eingebaut, erfassen Sie das als <strong>Zählerwechsel</strong> – nicht als gewöhnlichen Zählerstand. Sie finden die Funktion unter <strong>Objekt → Zählerstände</strong> in der Liste des jeweiligen Zählers: Tippen Sie auf „+“ und wählen Sie <strong>Zählerwechsel erfassen</strong>. Das gilt für Objekt-Zähler ebenso wie für Wohneinheiten-Zähler. Der Zählerwechsel erscheint in der Liste an der Stelle seines Datums, zwischen den Ablesungen.</p>
+  <p>Warum nicht einfach einen neuen Zählerstand eintragen? Ein neuer Zähler beginnt meist bei 0. Ohne Zählerwechsel sähe der Stand nach dem Tausch wie ein Rückgang aus, und die App würde einen Fehler melden. Mit einem Zählerwechsel rechnet die App den Verbrauch <strong>je Zähler</strong> und setzt beide Teile zusammen: Am Tag des Wechsels entsteht weder ein Plus noch ein Minus.</p>
+  <dl>
+    <dt>Art</dt>
+    <dd><strong>Tausch</strong>: Der alte Zähler wird ausgebaut und am selben Tag ein neuer eingebaut. <strong>Ausbau</strong>: Ein Zähler entfällt, ein neuer kommt nicht (mehr) hinzu. <strong>Einbau</strong>: Ein Zähler kommt neu hinzu, ohne dass vorher einer ausgebaut wurde.</dd>
+    <dt>Datum</dt>
+    <dd>Der Tag des Wechsels. An diesem Tag lässt sich keine weitere Ablesung erfassen: Die Werte des Wechsels <em>sind</em> die Ablesungen dieses Tages.</dd>
+    <dt>Alter Zähler – Endstand</dt>
+    <dd>Der letzte Stand des ausgebauten Zählers (bei Tausch und Ausbau).</dd>
+    <dt>Neuer Zähler – Anfangsstand</dt>
+    <dd>Der erste Stand des neuen Zählers (bei Tausch und Einbau). Er darf niedriger sein als der Endstand des alten Zählers, meist ist er 0. Tragen Sie ihn ausdrücklich ein, auch wenn er 0 ist.</dd>
+    <dt>Zählernummer (optional)</dt>
+    <dd>Nummer des alten bzw. neuen Zählers, nur zu Ihrer eigenen Dokumentation.</dd>
+    <dt>Mieterwechsel am selben Tag</dt>
+    <dd>Nur bei Wohneinheiten-Zählern mit Ausbau. Zeigt an, dass der Wechsel mit einem Mieterwechsel zusammenfällt; der Endstand dient dann zugleich als Zwischenablesung für den ausziehenden Mieter. Die Berechnung ist unabhängig davon korrekt – der Schalter dient der Dokumentation.</dd>
+  </dl>
+
+  <h3>Typische Fälle</h3>
+  <ul>
+    <li><strong>Zähler wird defekt oder turnusmäßig getauscht:</strong> <em>Tausch</em> mit Endstand des alten und Anfangsstand des neuen Zählers erfassen.</li>
+    <li><strong>HT/NT-Zähler wird durch einen einfachen Zähler ersetzt</strong> (mit zwei getrennten Kostenarten, siehe <a href="#tarife-de">Tarifoptionen</a>): In der Kostenart des weiterlaufenden Zählers (z. B. „HT“) erfassen Sie einen <em>Tausch</em>, in der anderen (z. B. „NT“) einen <em>Ausbau</em>. Beenden Sie die Tarifoption der NT-Kostenart zum Ausbaudatum.</li>
+    <li><strong>Einfacher Zähler wird durch einen HT/NT-Zähler ersetzt:</strong> In der bisherigen Kostenart erfassen Sie einen <em>Ausbau</em>. Für HT und NT legen Sie je eine neue verbrauchsbasierte Kostenart an und erfassen dort jeweils einen <em>Einbau</em> mit dem Anfangsstand; die Tarifoptionen beginnen mit dem Einbaudatum.</li>
+    <li><strong>Neuer Zähler mitten im Jahr</strong> (z. B. Wallbox): <em>Einbau</em> erfassen und die Tarifoption ab dem Einbaudatum anlegen. Davor gibt es für diese Kostenart keinen Verbrauch und keine Tarifpflicht.</li>
+    <li><strong>Zähler ist eine Zeit lang nicht eingebaut</strong> (z. B. Ausbau am 31.03., neuer Zähler am 31.05.): <em>Ausbau</em> und später <em>Einbau</em> getrennt erfassen. Dazwischen gibt es keinen Verbrauch, und in dieser Zeit lässt sich auch keine Ablesung erfassen.</li>
+  </ul>
+
+  <div class="note"><strong>Tarifoptionen und Grundpreis:</strong> Tarifoptionen müssen nur die Tage abdecken, an denen ein Zähler eingebaut ist. Der <strong>Grundpreis folgt der Tarifoption</strong>: Läuft sie nach einem Ausbau weiter, läuft auch der Grundpreis weiter. Beenden Sie die Tarifoption daher zum Ausbaudatum, wenn der Anschluss entfällt.</div>
+  <div class="note"><strong>Abgeleitete Kostenarten</strong> (z. B. Abwasser) haben keine eigenen Zähler: Erfassen Sie den Zählerwechsel bei der Referenz-Kostenart (z. B. Wasserversorgung), die abgeleitete Kostenart übernimmt ihn automatisch. Sie kann aber nicht unabhängig von ihrer Referenz mitten im Jahr beginnen oder enden.</div>
+
+  <h3>Prüfungen und Korrekturen</h3>
+  <p>Die App prüft jede Eingabe und erklärt, was nicht passt: Innerhalb eines Zählers darf der Stand nie sinken (bei einem neuen Zähler erfassen Sie einen Zählerwechsel); ein Ausbau ist nur bei eingebautem Zähler möglich, ein reiner Einbau nur, wenn gerade kein Zähler eingebaut ist; am Wechseltag und in Zeiten ohne eingebauten Zähler lässt sich keine Ablesung erfassen.</p>
+  <p>Einen Zählerwechsel können Sie jederzeit bearbeiten (Art, Datum, Werte). Beim Löschen weist die App darauf hin, wenn die Zählerstände danach nicht mehr zusammenpassen: Dann ist die Abrechnung erst nach erneutem Erfassen des Zählerwechsels berechenbar. Sobald ein Kalenderjahr finalisiert wurde, lassen sich Zählerwechsel aus diesem und allen früheren Jahren nicht mehr anlegen, bearbeiten oder löschen.</p>
 
   <h2 id="belege-de">Belege erfassen</h2>
   <p>Ein <strong>Beleg</strong> ist eine einzelne Ausgabe für eine Kostenart mit der Berechnungsart „Einfach“, z. B. eine Rechnung des Hausmeisters. Sie erfassen Belege im Tab <strong>Belege</strong>.</p>
@@ -417,7 +452,7 @@
   <!-- ============================== ENGLISH ============================== -->
   <section data-lang="en">
   <h1>User Guide</h1>
-  <p class="updated">Last updated: November 7, 2026 · App version 1.0.2</p>
+  <p class="updated">Last updated: November 7, 2026 · App version 1.1.0</p>
 
   <p>This guide walks through the entire app – from creating your first property to the finished PDF of the utility cost statement (German: <em>Betriebskostenabrechnung</em>). Every screen and every input field is explained where it first appears.</p>
 
@@ -431,6 +466,7 @@
       <li><a href="#kostenarten-en">Cost types</a></li>
       <li><a href="#tarife-en">Tariff options</a></li>
       <li><a href="#zaehlerstaende-en">Recording meter readings</a></li>
+      <li><a href="#zaehlerwechsel-en">Meter changes: replacement, removal, and installation</a></li>
       <li><a href="#belege-en">Recording expenses</a></li>
       <li><a href="#abrechnung-en">Creating a statement</a></li>
       <li><a href="#ergebnis-en">The finished statement &amp; PDF export</a></li>
@@ -600,7 +636,7 @@
     <dt>Supplier (optional)</dt>
     <dd>Name of the supplier, for your own reference only.</dd>
   </dl>
-  <div class="note"><strong>Important:</strong> The tariff options of a cost type must cover the entire statement period without gaps or overlaps – otherwise the statement cannot be calculated. The app prevents gaps, overlaps, and duplicate start dates during entry. If you add a new tariff while the previous one is still open-ended, it is automatically limited to the preceding day when you save.</div>
+  <div class="note"><strong>Important:</strong> The tariff options of a cost type must cover the entire statement period without gaps or overlaps – otherwise the statement cannot be calculated. The app prevents gaps, overlaps, and duplicate start dates during entry. If you add a new tariff while the previous one is still open-ended, it is automatically limited to the preceding day when you save. <strong>Exception:</strong> no tariff options are required for times in which no meter is installed (see <a href="#zaehlerwechsel-en">Meter changes</a>).</div>
 
   <div class="note"><strong>Meters with peak and off-peak registers (HT/NT):</strong> Within a single cost type there are no simultaneously valid tariff zones. If a meter has two registers (peak and off-peak) with different consumption prices, create <strong>two separate consumption-based cost types</strong> for it, e.g. "Common area electricity peak" and "Common area electricity off-peak" (<strong>Property → Cost types</strong>, calculation method "Consumption-based", unit kWh, same allocation key). For each cost type, record the <a href="#zaehlerstaende-en">meter readings</a> of its own register and maintain its own consumption price in the tariff options. In the statement both appear as separate lines; their sum is the total cost of the meter. <strong>Enter the base price for only one of the two cost types</strong> (leave it at 0 for the other) – it is incurred only once for the meter and would otherwise be charged twice. You can keep using the catalog cost type "Common area electricity" for one register and add the other as a custom cost type.</div>
 
@@ -616,13 +652,47 @@
     <dt>Date</dt>
     <dd>Reading date. A cost type and meter cannot be read twice on the same day, as it would otherwise be ambiguous which value applies.</dd>
     <dt>Meter reading</dt>
-    <dd>The value shown on the meter – not the consumption. The unit (e.g. m³) is taken from the cost type. The app calculates consumption itself as the difference from the previous reading.</dd>
+    <dd>The value shown on the meter – not the consumption. The unit (e.g. m³) is taken from the cost type. The app calculates consumption itself as the difference from the previous reading. Within one meter a value must never be lower than the previous one; for a new meter, record a <a href="#zaehlerwechsel-en">meter change</a>.</dd>
     <dt>Interim reading</dt>
     <dd>Unit meters only. Marks an unscheduled reading, typically at a tenant change, so consumption is split correctly between the outgoing and incoming tenant.</dd>
     <dt>Attachment</dt>
     <dd>Optionally a photo or PDF file of the meter or reading record, for your own documentation.</dd>
   </dl>
   <div class="note">Once a calendar year has been finalized, meter readings from that year and all earlier years can no longer be added, edited, or deleted – this keeps a completed statement traceable.</div>
+
+  <h2 id="zaehlerwechsel-en">Meter changes: replacement, removal, and installation</h2>
+  <p>When a meter is replaced, removed, or newly installed, record it as a <strong>meter change</strong> – not as an ordinary meter reading. You find the function under <strong>Property → Meter readings</strong> in the list of the respective meter: tap "+" and choose <strong>Record meter change</strong>. This applies to property meters as well as unit meters. The meter change appears in the list at the position of its date, between the readings.</p>
+  <p>Why not simply enter a new reading? A new meter usually starts at 0. Without a meter change, the value after the replacement would look like a decrease, and the app would report an error. With a meter change, the app calculates consumption <strong>per meter</strong> and adds both parts together: on the day of the change there is neither a gain nor a loss.</p>
+  <dl>
+    <dt>Type</dt>
+    <dd><strong>Replacement</strong>: the old meter is removed and a new one is installed on the same day. <strong>Removal</strong>: a meter is dropped and no new one follows. <strong>Installation</strong>: a meter is newly added without a previous one having been removed.</dd>
+    <dt>Date</dt>
+    <dd>The day of the change. No further reading can be recorded on that day: the values of the change <em>are</em> the readings of that day.</dd>
+    <dt>Old meter – final reading</dt>
+    <dd>The last value of the removed meter (for replacement and removal).</dd>
+    <dt>New meter – initial reading</dt>
+    <dd>The first value of the new meter (for replacement and installation). It may be lower than the final reading of the old meter, usually it is 0. Enter it explicitly, even if it is 0.</dd>
+    <dt>Meter number (optional)</dt>
+    <dd>Number of the old or new meter, for your own documentation only.</dd>
+    <dt>Tenant change on the same day</dt>
+    <dd>Unit meters with a removal only. Indicates that the change coincides with a tenant change; the final reading then also serves as the interim reading for the departing tenant. The calculation is correct regardless – the switch is for documentation.</dd>
+  </dl>
+
+  <h3>Typical cases</h3>
+  <ul>
+    <li><strong>A meter is defective or replaced on schedule:</strong> record a <em>replacement</em> with the final reading of the old and the initial reading of the new meter.</li>
+    <li><strong>A peak/off-peak meter is replaced by a simple meter</strong> (with two separate cost types, see <a href="#tarife-en">Tariff options</a>): in the cost type of the meter that continues (e.g. "peak") record a <em>replacement</em>, in the other one (e.g. "off-peak") a <em>removal</em>. End the tariff option of the off-peak cost type on the removal date.</li>
+    <li><strong>A simple meter is replaced by a peak/off-peak meter:</strong> in the previous cost type record a <em>removal</em>. For peak and off-peak, create one new consumption-based cost type each and record an <em>installation</em> with the initial reading there; the tariff options start on the installation date.</li>
+    <li><strong>A new meter in the middle of the year</strong> (e.g. a wallbox): record an <em>installation</em> and create the tariff option from the installation date. Before that, this cost type has no consumption and no tariff is required.</li>
+    <li><strong>A meter is not installed for a while</strong> (e.g. removal on March 31, new meter on May 31): record the <em>removal</em> and the later <em>installation</em> separately. There is no consumption in between, and no reading can be recorded during that time.</li>
+  </ul>
+
+  <div class="note"><strong>Tariff options and base price:</strong> Tariff options only have to cover the days on which a meter is installed. The <strong>base price follows the tariff option</strong>: if it continues after a removal, the base price continues too. End the tariff option on the removal date if the connection is discontinued.</div>
+  <div class="note"><strong>Derived cost types</strong> (e.g. sewage) have no meters of their own: record the meter change on the reference cost type (e.g. water supply), and the derived cost type adopts it automatically. It cannot, however, start or end in the middle of the year independently of its reference.</div>
+
+  <h3>Checks and corrections</h3>
+  <p>The app checks every entry and explains what does not fit: within a single meter the value must never decrease (for a new meter, record a meter change); a removal is only possible while a meter is installed, a pure installation only while none is; no reading can be recorded on the day of a change or during times without an installed meter.</p>
+  <p>You can edit a meter change at any time (type, date, values). When deleting, the app points out if the readings no longer fit together afterwards: the statement can then only be calculated after the meter change has been recorded again. Once a calendar year has been finalized, meter changes from that year and all earlier years can no longer be added, edited, or deleted.</p>
 
   <h2 id="belege-en">Recording expenses</h2>
   <p>An <strong>expense</strong> is a single expenditure for a cost type using the "Simple" method, e.g. an invoice from the caretaker. You record expenses in the <strong>Expenses</strong> tab.</p>
@@ -726,7 +796,7 @@
   <!-- ============================== FRANÇAIS ============================== -->
   <section data-lang="fr">
   <h1>Guide d'utilisation</h1>
-  <p class="updated">Dernière mise à jour : 7 novembre 2026 · Version de l'application 1.0.2</p>
+  <p class="updated">Dernière mise à jour : 7 novembre 2026 · Version de l'application 1.1.0</p>
 
   <p>Ce guide vous accompagne à travers l'intégralité de l'application – de la création de votre premier bien jusqu'au PDF final du décompte de charges (en allemand : <em>Betriebskostenabrechnung</em>). Chaque écran et chaque champ de saisie est expliqué à l'endroit où il apparaît pour la première fois.</p>
 
@@ -740,6 +810,7 @@
       <li><a href="#kostenarten-fr">Types de charges</a></li>
       <li><a href="#tarife-fr">Options tarifaires</a></li>
       <li><a href="#zaehlerstaende-fr">Saisir les relevés de compteur</a></li>
+      <li><a href="#zaehlerwechsel-fr">Changements de compteur : remplacement, dépose et pose</a></li>
       <li><a href="#belege-fr">Saisir les dépenses</a></li>
       <li><a href="#abrechnung-fr">Créer un décompte</a></li>
       <li><a href="#ergebnis-fr">Le décompte finalisé et l'export PDF</a></li>
@@ -909,7 +980,7 @@
     <dt>Fournisseur (facultatif)</dt>
     <dd>Nom du fournisseur, pour votre seule information.</dd>
   </dl>
-  <div class="note"><strong>Important :</strong> les options tarifaires d'un type de charge doivent couvrir l'intégralité de la période du décompte, sans lacune ni chevauchement – sinon le décompte ne peut pas être calculé. L'application empêche les lacunes, les chevauchements et les dates de début en double dès la saisie. Si vous enregistrez un nouveau tarif alors que le précédent est encore à durée indéterminée, celui-ci est automatiquement limité à la veille lors de l'enregistrement.</div>
+  <div class="note"><strong>Important :</strong> les options tarifaires d'un type de charge doivent couvrir l'intégralité de la période du décompte, sans lacune ni chevauchement – sinon le décompte ne peut pas être calculé. L'application empêche les lacunes, les chevauchements et les dates de début en double dès la saisie. Si vous enregistrez un nouveau tarif alors que le précédent est encore à durée indéterminée, celui-ci est automatiquement limité à la veille lors de l'enregistrement. <strong>Exception :</strong> aucune option tarifaire n'est exigée pour les périodes sans compteur posé (voir <a href="#zaehlerwechsel-fr">Changements de compteur</a>).</div>
 
   <div class="note"><strong>Compteurs à heures pleines et heures creuses (HP/HC) :</strong> au sein d'un même type de charge, il n'existe pas de zones tarifaires simultanées. Si un compteur possède deux cadrans (heures pleines et heures creuses) avec des prix à la consommation différents, créez pour cela <strong>deux types de charges distincts basés sur la consommation</strong>, par ex. « Électricité des parties communes HP » et « Électricité des parties communes HC » (<strong>Bien → Types de charges</strong>, méthode de calcul « Basé sur la consommation », unité kWh, même clé de répartition). Pour chaque type de charge, saisissez les <a href="#zaehlerstaende-fr">relevés de compteur</a> du cadran correspondant et gérez son propre prix à la consommation dans les options tarifaires. Dans le décompte, les deux apparaissent sur des lignes distinctes ; leur somme correspond au coût total du compteur. <strong>Ne saisissez le prix de base que pour l'un des deux types de charges</strong> (laissez-le à 0 pour l'autre) – il n'est dû qu'une fois pour le compteur et serait sinon facturé deux fois. Vous pouvez continuer à utiliser le type de charge du catalogue « Électricité des parties communes » pour un cadran et ajouter l'autre comme type de charge personnalisé.</div>
 
@@ -925,13 +996,47 @@
     <dt>Date</dt>
     <dd>Date du relevé. Un même type de charge et compteur ne peut pas être relevé deux fois le même jour, sinon la valeur applicable serait ambiguë.</dd>
     <dt>Relevé de compteur</dt>
-    <dd>La valeur affichée sur le compteur – et non la consommation. L'unité (par ex. m³) est reprise du type de charge. L'application calcule elle-même la consommation comme différence avec le relevé précédent.</dd>
+    <dd>La valeur affichée sur le compteur – et non la consommation. L'unité (par ex. m³) est reprise du type de charge. L'application calcule elle-même la consommation comme différence avec le relevé précédent. Pour un même compteur, une valeur ne doit jamais être inférieure à la précédente ; pour un nouveau compteur, enregistrez un <a href="#zaehlerwechsel-fr">changement de compteur</a>.</dd>
     <dt>Relevé intermédiaire</dt>
     <dd>Compteurs de logement uniquement. Signale un relevé exceptionnel, typiquement lors d'un changement de locataire, afin que la consommation soit correctement répartie entre l'ancien et le nouveau locataire.</dd>
     <dt>Pièce jointe</dt>
     <dd>Facultativement, une photo ou un fichier PDF du compteur ou du procès-verbal de relevé, pour votre propre documentation.</dd>
   </dl>
   <div class="note">Dès qu'une année civile a été finalisée, les relevés de cette année et de toutes les années antérieures ne peuvent plus être ajoutés, modifiés ni supprimés – cela garantit qu'un décompte établi reste vérifiable.</div>
+
+  <h2 id="zaehlerwechsel-fr">Changements de compteur : remplacement, dépose et pose</h2>
+  <p>Lorsqu'un compteur est remplacé, déposé ou nouvellement posé, enregistrez-le comme <strong>changement de compteur</strong> – et non comme un simple relevé. Vous trouvez la fonction sous <strong>Bien → Relevés de compteur</strong>, dans la liste du compteur concerné : appuyez sur « + » et choisissez <strong>Enregistrer un changement de compteur</strong>. Cela vaut pour les compteurs du bien comme pour les compteurs de logement. Le changement apparaît dans la liste à l'endroit de sa date, entre les relevés.</p>
+  <p>Pourquoi ne pas simplement saisir un nouveau relevé ? Un nouveau compteur démarre généralement à 0. Sans changement de compteur, la valeur après le remplacement ressemblerait à une baisse, et l'application signalerait une erreur. Avec un changement de compteur, l'application calcule la consommation <strong>par compteur</strong> et additionne les deux parties : le jour du changement, il n'y a ni hausse ni baisse.</p>
+  <dl>
+    <dt>Type</dt>
+    <dd><strong>Remplacement</strong> : l'ancien compteur est déposé et un nouveau est posé le même jour. <strong>Dépose</strong> : un compteur disparaît sans qu'un nouveau le remplace. <strong>Pose</strong> : un compteur est ajouté sans qu'un précédent ait été déposé.</dd>
+    <dt>Date</dt>
+    <dd>Le jour du changement. Aucun autre relevé ne peut être saisi ce jour-là : les valeurs du changement <em>sont</em> les relevés de ce jour.</dd>
+    <dt>Ancien compteur – relevé final</dt>
+    <dd>La dernière valeur du compteur déposé (pour le remplacement et la dépose).</dd>
+    <dt>Nouveau compteur – relevé initial</dt>
+    <dd>La première valeur du nouveau compteur (pour le remplacement et la pose). Elle peut être inférieure au relevé final de l'ancien compteur, en général elle vaut 0. Saisissez-la explicitement, même si elle vaut 0.</dd>
+    <dt>Numéro de compteur (facultatif)</dt>
+    <dd>Numéro de l'ancien ou du nouveau compteur, uniquement pour votre propre documentation.</dd>
+    <dt>Changement de locataire le même jour</dt>
+    <dd>Uniquement pour les compteurs de logement avec dépose. Indique que le changement coïncide avec un changement de locataire ; le relevé final sert alors aussi de relevé intermédiaire pour le locataire sortant. Le calcul est correct dans tous les cas – l'interrupteur sert à la documentation.</dd>
+  </dl>
+
+  <h3>Cas typiques</h3>
+  <ul>
+    <li><strong>Un compteur est défectueux ou remplacé selon le calendrier :</strong> enregistrez un <em>remplacement</em> avec le relevé final de l'ancien et le relevé initial du nouveau compteur.</li>
+    <li><strong>Un compteur HP/HC est remplacé par un compteur simple</strong> (avec deux types de charges distincts, voir <a href="#tarife-fr">Options tarifaires</a>) : dans le type de charge du compteur qui continue (par ex. « HP »), enregistrez un <em>remplacement</em>, dans l'autre (par ex. « HC ») une <em>dépose</em>. Terminez l'option tarifaire du type de charge HC à la date de dépose.</li>
+    <li><strong>Un compteur simple est remplacé par un compteur HP/HC :</strong> dans le type de charge existant, enregistrez une <em>dépose</em>. Pour HP et HC, créez chacun un nouveau type de charge basé sur la consommation et enregistrez-y une <em>pose</em> avec le relevé initial ; les options tarifaires commencent à la date de pose.</li>
+    <li><strong>Un nouveau compteur en cours d'année</strong> (par ex. une borne de recharge) : enregistrez une <em>pose</em> et créez l'option tarifaire à partir de la date de pose. Avant cette date, ce type de charge n'a ni consommation ni obligation tarifaire.</li>
+    <li><strong>Un compteur n'est pas posé pendant un certain temps</strong> (par ex. dépose le 31 mars, nouveau compteur le 31 mai) : enregistrez la <em>dépose</em> et la <em>pose</em> ultérieure séparément. Il n'y a pas de consommation entre les deux, et aucun relevé ne peut être saisi pendant cette période.</li>
+  </ul>
+
+  <div class="note"><strong>Options tarifaires et prix de base :</strong> Les options tarifaires doivent seulement couvrir les jours où un compteur est posé. Le <strong>prix de base suit l'option tarifaire</strong> : si elle continue après une dépose, le prix de base continue aussi. Terminez l'option tarifaire à la date de dépose si le raccordement est supprimé.</div>
+  <div class="note"><strong>Les types de charges dérivés</strong> (par ex. eaux usées) n'ont pas de compteur propre : enregistrez le changement de compteur sur le type de charge de référence (par ex. alimentation en eau), le type dérivé le reprend automatiquement. Il ne peut toutefois pas commencer ou se terminer en cours d'année indépendamment de sa référence.</div>
+
+  <h3>Contrôles et corrections</h3>
+  <p>L'application contrôle chaque saisie et explique ce qui ne convient pas : pour un même compteur, la valeur ne doit jamais diminuer (pour un nouveau compteur, enregistrez un changement de compteur) ; une dépose n'est possible que si un compteur est posé, une simple pose seulement si aucun ne l'est ; aucun relevé ne peut être saisi le jour d'un changement ni pendant les périodes sans compteur posé.</p>
+  <p>Vous pouvez modifier un changement de compteur à tout moment (type, date, valeurs). Lors de la suppression, l'application vous avertit si les relevés ne sont plus cohérents ensuite : le décompte ne peut alors être calculé qu'après avoir enregistré à nouveau le changement de compteur. Dès qu'une année civile a été finalisée, les changements de compteur de cette année et de toutes les années antérieures ne peuvent plus être ajoutés, modifiés ni supprimés.</p>
 
   <h2 id="belege-fr">Saisir les dépenses</h2>
   <p>Une <strong>dépense</strong> est une charge individuelle pour un type de charge utilisant la méthode « Simple », par ex. une facture du concierge. Vous saisissez les dépenses dans l'onglet <strong>Dépenses</strong>.</p>
