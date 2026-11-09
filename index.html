@@ -343,7 +343,7 @@
     <dt>Art</dt>
     <dd><strong>Tausch</strong>: Der alte Zähler wird ausgebaut und am selben Tag ein neuer eingebaut. <strong>Ausbau</strong>: Ein Zähler entfällt, ein neuer kommt nicht (mehr) hinzu. <strong>Einbau</strong>: Ein Zähler kommt neu hinzu, ohne dass vorher einer ausgebaut wurde.</dd>
     <dt>Datum</dt>
-    <dd>Der Tag des Wechsels. An diesem Tag lässt sich keine weitere Ablesung erfassen: Die Werte des Wechsels <em>sind</em> die Ablesungen dieses Tages.</dd>
+    <dd>Der Tag des Wechsels. An diesem Tag lässt sich keine weitere Ablesung erfassen: Die Werte des Wechsels <em>sind</em> die Ablesungen dieses Tages. Welcher Tag noch zum alten und welcher schon zum neuen Zähler gehört, zeigt <a href="#welcher-tag-de">Welcher Tag zählt?</a></dd>
     <dt>Alter Zähler – Endstand</dt>
     <dd>Der letzte Stand des ausgebauten Zählers (bei Tausch und Ausbau).</dd>
     <dt>Neuer Zähler – Anfangsstand</dt>
@@ -354,13 +354,25 @@
     <dd>Nur bei Wohneinheiten-Zählern mit Ausbau. Zeigt an, dass der Wechsel mit einem Mieterwechsel zusammenfällt; der Endstand dient dann zugleich als Zwischenablesung für den ausziehenden Mieter. Die Berechnung ist unabhängig davon korrekt – der Schalter dient der Dokumentation.</dd>
   </dl>
 
+  <h3 id="welcher-tag-de">Welcher Tag zählt?</h3>
+  <p>Ein Zählerstand gilt am Ende seines Tages. Für Zählerwechsel bedeutet das:</p>
+  <div class="table-wrap">
+  <table>
+    <tr><th>Art</th><th>Bedeutung</th></tr>
+    <tr><td><strong>Tausch</strong> am 30.06.</td><td>Endstand und Anfangsstand gelten am Ende des 30.06. Der 30.06. zählt noch zum alten Zähler, ab dem 01.07. zählt der neue.</td></tr>
+    <tr><td><strong>Ausbau</strong> am 30.06.</td><td>Der Endstand gilt am Ende des 30.06. Der 30.06. zählt noch mit Zähler, ab dem 01.07. gibt es keinen Verbrauch mehr.</td></tr>
+    <tr><td><strong>Einbau</strong> am 01.07.</td><td>Der Anfangsstand gilt zu Beginn des 01.07. Der 01.07. zählt schon mit dem neuen Zähler.</td></tr>
+  </table>
+  </div>
+  <p>Ein Ausbau am 31.03. und ein Einbau am 01.04. ergeben daher keine Lücke: Das rechnet genauso wie ein Tausch am 31.03.</p>
+
   <h3>Typische Fälle</h3>
   <ul>
     <li><strong>Zähler wird defekt oder turnusmäßig getauscht:</strong> <em>Tausch</em> mit Endstand des alten und Anfangsstand des neuen Zählers erfassen.</li>
     <li><strong>HT/NT-Zähler wird durch einen einfachen Zähler ersetzt</strong> (mit zwei getrennten Kostenarten, siehe <a href="#tarife-de">Tarifoptionen</a>): In der Kostenart des weiterlaufenden Zählers (z. B. „HT“) erfassen Sie einen <em>Tausch</em>, in der anderen (z. B. „NT“) einen <em>Ausbau</em>. Beenden Sie die Tarifoption der NT-Kostenart zum Ausbaudatum.</li>
-    <li><strong>Einfacher Zähler wird durch einen HT/NT-Zähler ersetzt:</strong> In der bisherigen Kostenart erfassen Sie einen <em>Ausbau</em>. Für HT und NT legen Sie je eine neue verbrauchsbasierte Kostenart an und erfassen dort jeweils einen <em>Einbau</em> mit dem Anfangsstand; die Tarifoptionen beginnen mit dem Einbaudatum.</li>
+    <li><strong>Einfacher Zähler wird durch einen HT/NT-Zähler ersetzt:</strong> In der bisherigen Kostenart erfassen Sie einen <em>Ausbau</em>. Für HT und NT legen Sie je eine neue verbrauchsbasierte Kostenart an und erfassen dort jeweils einen <em>Einbau</em> mit dem Anfangsstand – <strong>am Tag nach dem Ausbau</strong> (Ausbau am 30.06., Einbau am 01.07.), damit der Wechseltag nicht doppelt zählt. Die Tarifoptionen beginnen mit dem Einbaudatum.</li>
     <li><strong>Neuer Zähler mitten im Jahr</strong> (z. B. Wallbox): <em>Einbau</em> erfassen und die Tarifoption ab dem Einbaudatum anlegen. Davor gibt es für diese Kostenart keinen Verbrauch und keine Tarifpflicht.</li>
-    <li><strong>Zähler ist eine Zeit lang nicht eingebaut</strong> (z. B. Ausbau am 31.03., neuer Zähler am 31.05.): <em>Ausbau</em> und später <em>Einbau</em> getrennt erfassen. Dazwischen gibt es keinen Verbrauch, und in dieser Zeit lässt sich auch keine Ablesung erfassen.</li>
+    <li><strong>Zähler ist eine Zeit lang nicht eingebaut</strong> (z. B. Ausbau am 31.03., neuer Zähler am 31.05.): <em>Ausbau</em> und später <em>Einbau</em> getrennt erfassen. Dazwischen (hier 01.04. bis 30.05.) gibt es keinen Verbrauch, und in dieser Zeit lässt sich auch keine Ablesung erfassen.</li>
   </ul>
 
   <div class="note"><strong>Tarifoptionen und Grundpreis:</strong> Tarifoptionen müssen nur die Tage abdecken, an denen ein Zähler eingebaut ist. Der <strong>Grundpreis folgt der Tarifoption</strong>: Läuft sie nach einem Ausbau weiter, läuft auch der Grundpreis weiter. Beenden Sie die Tarifoption daher zum Ausbaudatum, wenn der Anschluss entfällt.</div>
@@ -381,7 +393,7 @@
     <dt>Übernehmen in</dt>
     <dd>Für jeden Zähler aus Zählerstände Manager (dort „Messstelle“) wählen Sie das Ziel: bei einem Gebäudezähler eine verbrauchsbasierte Kostenart, bei einem Zähler einer Wohneinheit eine Kostenart mit dem Verteilerschlüssel „Wohneinheitenzähler“ – entweder den <strong>bisherigen Zähler</strong> der Wohneinheit oder einen <strong>weiteren Zähler</strong> (siehe <a href="#mehrere-zaehler-de">Mehrere Zähler in einer Wohneinheit</a>). Was auf „Nicht importieren“ steht, wird nicht übernommen. Hat ein Zähler zwei Zählwerke (HT/NT), ordnen Sie jedes einzeln zu.</dd>
   </dl>
-  <p>Die Einheit muss übereinstimmen (z. B. kWh); Werte werden nicht umgerechnet. Zählerwechsel aus Zählerstände Manager werden als Tausch, Ausbau oder Einbau übernommen.</p>
+  <p>Die Einheit muss übereinstimmen (z. B. kWh); Werte werden nicht umgerechnet. Zählerwechsel aus Zählerstände Manager werden als Tausch, Ausbau oder Einbau übernommen. Wechseln dabei die Zählwerke (z. B. von Eintarif auf HT/NT in getrennte Kostenarten), legt die App den Einbau in den neuen Kostenarten auf den Tag nach dem Ausbau – genau wie bei der <a href="#welcher-tag-de">manuellen Erfassung</a>.</p>
 
   <h3>Vorschau</h3>
   <p>Unter jedem Zähler zeigt die App sofort, was passiert: <strong>Wird übernommen</strong> mit der Zahl neuer und bereits vorhandener Einträge, oder <strong>Wird nicht übernommen</strong> mit dem Grund, etwa weil ein Zählerstand sinken würde oder die Einheit nicht passt. Ein Zähler wird immer ganz oder gar nicht übernommen. Einträge, die schon vorhanden sind (gleicher Tag, gleicher Wert), erkennt die App und legt sie nicht doppelt an. Vor dem Import zeigt sie noch einmal, wie viele Zählerstände und Zählerwechsel neu hinzukommen.</p>
@@ -730,7 +742,7 @@
     <dt>Type</dt>
     <dd><strong>Replacement</strong>: the old meter is removed and a new one is installed on the same day. <strong>Removal</strong>: a meter is dropped and no new one follows. <strong>Installation</strong>: a meter is newly added without a previous one having been removed.</dd>
     <dt>Date</dt>
-    <dd>The day of the change. No further reading can be recorded on that day: the values of the change <em>are</em> the readings of that day.</dd>
+    <dd>The day of the change. No further reading can be recorded on that day: the values of the change <em>are</em> the readings of that day. Which day still belongs to the old meter and which already to the new one is shown under <a href="#welcher-tag-en">Which day counts?</a></dd>
     <dt>Old meter – final reading</dt>
     <dd>The last value of the removed meter (for replacement and removal).</dd>
     <dt>New meter – initial reading</dt>
@@ -741,13 +753,25 @@
     <dd>Unit meters with a removal only. Indicates that the change coincides with a tenant change; the final reading then also serves as the interim reading for the departing tenant. The calculation is correct regardless – the switch is for documentation.</dd>
   </dl>
 
+  <h3 id="welcher-tag-en">Which day counts?</h3>
+  <p>A meter reading applies at the end of its day. For meter changes this means:</p>
+  <div class="table-wrap">
+  <table>
+    <tr><th>Type</th><th>Meaning</th></tr>
+    <tr><td><strong>Replacement</strong> on June 30</td><td>The final and initial readings both apply at the end of June 30. June 30 still counts for the old meter; the new one counts from July 1.</td></tr>
+    <tr><td><strong>Removal</strong> on June 30</td><td>The final reading applies at the end of June 30. June 30 still counts with the meter; from July 1 there is no more consumption.</td></tr>
+    <tr><td><strong>Installation</strong> on July 1</td><td>The initial reading applies at the start of July 1. July 1 already counts with the new meter.</td></tr>
+  </table>
+  </div>
+  <p>A removal on March 31 and an installation on April 1 therefore leave no gap: this is calculated exactly like a replacement on March 31.</p>
+
   <h3>Typical cases</h3>
   <ul>
     <li><strong>A meter is defective or replaced on schedule:</strong> record a <em>replacement</em> with the final reading of the old and the initial reading of the new meter.</li>
     <li><strong>A peak/off-peak meter is replaced by a simple meter</strong> (with two separate cost types, see <a href="#tarife-en">Tariff options</a>): in the cost type of the meter that continues (e.g. "peak") record a <em>replacement</em>, in the other one (e.g. "off-peak") a <em>removal</em>. End the tariff option of the off-peak cost type on the removal date.</li>
-    <li><strong>A simple meter is replaced by a peak/off-peak meter:</strong> in the previous cost type record a <em>removal</em>. For peak and off-peak, create one new consumption-based cost type each and record an <em>installation</em> with the initial reading there; the tariff options start on the installation date.</li>
+    <li><strong>A simple meter is replaced by a peak/off-peak meter:</strong> in the previous cost type record a <em>removal</em>. For peak and off-peak, create one new consumption-based cost type each and record an <em>installation</em> with the initial reading there – <strong>on the day after the removal</strong> (removal on June 30, installation on July 1), so that the day of the change is not counted twice. The tariff options start on the installation date.</li>
     <li><strong>A new meter in the middle of the year</strong> (e.g. a wallbox): record an <em>installation</em> and create the tariff option from the installation date. Before that, this cost type has no consumption and no tariff is required.</li>
-    <li><strong>A meter is not installed for a while</strong> (e.g. removal on March 31, new meter on May 31): record the <em>removal</em> and the later <em>installation</em> separately. There is no consumption in between, and no reading can be recorded during that time.</li>
+    <li><strong>A meter is not installed for a while</strong> (e.g. removal on March 31, new meter on May 31): record the <em>removal</em> and the later <em>installation</em> separately. There is no consumption in between (here April 1 to May 30), and no reading can be recorded during that time.</li>
   </ul>
 
   <div class="note"><strong>Tariff options and base price:</strong> Tariff options only have to cover the days on which a meter is installed. The <strong>base price follows the tariff option</strong>: if it continues after a removal, the base price continues too. End the tariff option on the removal date if the connection is discontinued.</div>
@@ -768,7 +792,7 @@
     <dt>Import into</dt>
     <dd>For each meter from Zählerstände Manager (called a "metering point" there), you choose the target: for a building meter a consumption-based cost type, for a meter of a unit a cost type with the "Unit meter" allocation key – either the unit's <strong>existing meter</strong> or an <strong>additional meter</strong> (see <a href="#mehrere-zaehler-en">Several meters in one unit</a>). Anything set to "Don't import" is not imported. If a meter has two registers (peak/off-peak), assign each one separately.</dd>
   </dl>
-  <p>The unit must match (e.g. kWh); values are not converted. Meter changes from Zählerstände Manager are imported as a replacement, removal, or installation.</p>
+  <p>The unit must match (e.g. kWh); values are not converted. Meter changes from Zählerstände Manager are imported as a replacement, removal, or installation. If the registers change in the process (e.g. from single-rate to peak/off-peak in separate cost types), the app places the installation in the new cost types on the day after the removal – just as with <a href="#welcher-tag-en">manual entry</a>.</p>
 
   <h3>Preview</h3>
   <p>Below each meter, the app immediately shows what will happen: <strong>Will be imported</strong> with the number of new and already present entries, or <strong>Will not be imported</strong> with the reason, for instance because a reading would decrease or the unit does not match. A meter is always imported completely or not at all. Entries that already exist (same day, same value) are recognized and not created twice. Before importing, the app shows once more how many meter readings and meter changes will be added.</p>
@@ -1117,7 +1141,7 @@
     <dt>Type</dt>
     <dd><strong>Remplacement</strong> : l'ancien compteur est déposé et un nouveau est posé le même jour. <strong>Dépose</strong> : un compteur disparaît sans qu'un nouveau le remplace. <strong>Pose</strong> : un compteur est ajouté sans qu'un précédent ait été déposé.</dd>
     <dt>Date</dt>
-    <dd>Le jour du changement. Aucun autre relevé ne peut être saisi ce jour-là : les valeurs du changement <em>sont</em> les relevés de ce jour.</dd>
+    <dd>Le jour du changement. Aucun autre relevé ne peut être saisi ce jour-là : les valeurs du changement <em>sont</em> les relevés de ce jour. Quel jour compte encore pour l'ancien compteur et lequel déjà pour le nouveau : voir <a href="#welcher-tag-fr">Quel jour compte ?</a></dd>
     <dt>Ancien compteur – relevé final</dt>
     <dd>La dernière valeur du compteur déposé (pour le remplacement et la dépose).</dd>
     <dt>Nouveau compteur – relevé initial</dt>
@@ -1128,13 +1152,25 @@
     <dd>Uniquement pour les compteurs de logement avec dépose. Indique que le changement coïncide avec un changement de locataire ; le relevé final sert alors aussi de relevé intermédiaire pour le locataire sortant. Le calcul est correct dans tous les cas – l'interrupteur sert à la documentation.</dd>
   </dl>
 
+  <h3 id="welcher-tag-fr">Quel jour compte ?</h3>
+  <p>Un relevé vaut à la fin de son jour. Pour les changements de compteur, cela signifie :</p>
+  <div class="table-wrap">
+  <table>
+    <tr><th>Type</th><th>Signification</th></tr>
+    <tr><td><strong>Remplacement</strong> le 30/06</td><td>Le relevé final et le relevé initial valent tous deux à la fin du 30/06. Le 30/06 compte encore pour l'ancien compteur ; le nouveau compte à partir du 01/07.</td></tr>
+    <tr><td><strong>Dépose</strong> le 30/06</td><td>Le relevé final vaut à la fin du 30/06. Le 30/06 compte encore avec le compteur ; à partir du 01/07, il n'y a plus de consommation.</td></tr>
+    <tr><td><strong>Pose</strong> le 01/07</td><td>Le relevé initial vaut au début du 01/07. Le 01/07 compte déjà avec le nouveau compteur.</td></tr>
+  </table>
+  </div>
+  <p>Une dépose le 31/03 suivie d'une pose le 01/04 ne laisse donc aucune lacune : le calcul est identique à un remplacement le 31/03.</p>
+
   <h3>Cas typiques</h3>
   <ul>
     <li><strong>Un compteur est défectueux ou remplacé selon le calendrier :</strong> enregistrez un <em>remplacement</em> avec le relevé final de l'ancien et le relevé initial du nouveau compteur.</li>
     <li><strong>Un compteur HP/HC est remplacé par un compteur simple</strong> (avec deux types de charges distincts, voir <a href="#tarife-fr">Options tarifaires</a>) : dans le type de charge du compteur qui continue (par ex. « HP »), enregistrez un <em>remplacement</em>, dans l'autre (par ex. « HC ») une <em>dépose</em>. Terminez l'option tarifaire du type de charge HC à la date de dépose.</li>
-    <li><strong>Un compteur simple est remplacé par un compteur HP/HC :</strong> dans le type de charge existant, enregistrez une <em>dépose</em>. Pour HP et HC, créez chacun un nouveau type de charge basé sur la consommation et enregistrez-y une <em>pose</em> avec le relevé initial ; les options tarifaires commencent à la date de pose.</li>
+    <li><strong>Un compteur simple est remplacé par un compteur HP/HC :</strong> dans le type de charge existant, enregistrez une <em>dépose</em>. Pour HP et HC, créez chacun un nouveau type de charge basé sur la consommation et enregistrez-y une <em>pose</em> avec le relevé initial – <strong>le lendemain de la dépose</strong> (dépose le 30/06, pose le 01/07), afin que le jour du changement ne soit pas compté deux fois. Les options tarifaires commencent à la date de pose.</li>
     <li><strong>Un nouveau compteur en cours d'année</strong> (par ex. une borne de recharge) : enregistrez une <em>pose</em> et créez l'option tarifaire à partir de la date de pose. Avant cette date, ce type de charge n'a ni consommation ni obligation tarifaire.</li>
-    <li><strong>Un compteur n'est pas posé pendant un certain temps</strong> (par ex. dépose le 31 mars, nouveau compteur le 31 mai) : enregistrez la <em>dépose</em> et la <em>pose</em> ultérieure séparément. Il n'y a pas de consommation entre les deux, et aucun relevé ne peut être saisi pendant cette période.</li>
+    <li><strong>Un compteur n'est pas posé pendant un certain temps</strong> (par ex. dépose le 31 mars, nouveau compteur le 31 mai) : enregistrez la <em>dépose</em> et la <em>pose</em> ultérieure séparément. Il n'y a pas de consommation entre les deux (ici du 1er avril au 30 mai), et aucun relevé ne peut être saisi pendant cette période.</li>
   </ul>
 
   <div class="note"><strong>Options tarifaires et prix de base :</strong> Les options tarifaires doivent seulement couvrir les jours où un compteur est posé. Le <strong>prix de base suit l'option tarifaire</strong> : si elle continue après une dépose, le prix de base continue aussi. Terminez l'option tarifaire à la date de dépose si le raccordement est supprimé.</div>
@@ -1155,7 +1191,7 @@
     <dt>Importer dans</dt>
     <dd>Pour chaque compteur de Zählerstände Manager (appelé « point de comptage »), vous choisissez la cible : pour un compteur du bâtiment, un type de charge basé sur la consommation ; pour un compteur de logement, un type de charge avec la clé « compteur de logement » – soit le <strong>compteur existant</strong> du logement, soit un <strong>compteur supplémentaire</strong> (voir <a href="#mehrere-zaehler-fr">Plusieurs compteurs dans un logement</a>). Ce qui est réglé sur « Ne pas importer » n'est pas repris. Si un compteur possède deux registres (HP/HC), attribuez chacun séparément.</dd>
   </dl>
-  <p>L'unité doit correspondre (par ex. kWh) ; les valeurs ne sont pas converties. Les changements de compteur de Zählerstände Manager sont repris comme remplacement, dépose ou pose.</p>
+  <p>L'unité doit correspondre (par ex. kWh) ; les valeurs ne sont pas converties. Les changements de compteur de Zählerstände Manager sont repris comme remplacement, dépose ou pose. Si les registres changent à cette occasion (par ex. passage d'un tarif unique à HP/HC dans des types de charges distincts), l'application place la pose dans les nouveaux types de charges au lendemain de la dépose – comme pour la <a href="#welcher-tag-fr">saisie manuelle</a>.</p>
 
   <h3>Aperçu</h3>
   <p>Sous chaque compteur, l'application indique immédiatement ce qui va se passer : <strong>Sera importé</strong>, avec le nombre d'entrées nouvelles et déjà présentes, ou <strong>Ne sera pas importé</strong>, avec la raison, par exemple parce qu'un relevé diminuerait ou que l'unité ne correspond pas. Un compteur est toujours importé entièrement ou pas du tout. Les entrées déjà présentes (même jour, même valeur) sont reconnues et ne sont pas créées en double. Avant l'importation, l'application indique encore combien de relevés et de changements de compteur seront ajoutés.</p>
