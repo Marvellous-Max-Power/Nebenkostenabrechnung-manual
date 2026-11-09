@@ -108,7 +108,7 @@
   <!-- ============================== DEUTSCH ============================== -->
   <section data-lang="de" class="active">
   <h1>Benutzerhandbuch</h1>
-  <p class="updated">Stand: 8. November 2026 · App-Version 1.1.0</p>
+  <p class="updated">Stand: 9. November 2026 · App-Version 1.2.0</p>
 
   <p>Dieses Handbuch führt einmal komplett durch die App – vom Anlegen des ersten Objekts bis zum fertigen PDF der Betriebskostenabrechnung. Jeder Bildschirm und jedes Eingabefeld wird an der Stelle erklärt, an der es zum ersten Mal vorkommt.</p>
 
@@ -123,6 +123,7 @@
       <li><a href="#tarife-de">Tarifoptionen</a></li>
       <li><a href="#zaehlerstaende-de">Zählerstände erfassen</a></li>
       <li><a href="#zaehlerwechsel-de">Zählerwechsel: Tausch, Ausbau und Einbau</a></li>
+      <li><a href="#import-de">Zählerstände aus Zählerstände Manager importieren</a></li>
       <li><a href="#belege-de">Belege erfassen</a></li>
       <li><a href="#abrechnung-de">Eine Abrechnung erstellen</a></li>
       <li><a href="#ergebnis-de">Die fertige Abrechnung &amp; PDF-Export</a></li>
@@ -270,7 +271,7 @@
     <tr><td><strong>Personenzahl</strong></td><td>Nach Personen × belegten Tagen, siehe <a href="#mietverhaeltnisse-de">Personenzahl-Verlauf</a>. Leerstehende Wohneinheiten gehen mit der fiktiven Belegung des Objekts ein.</td></tr>
     <tr><td><strong>Anzahl Wohneinheiten</strong></td><td>Gleichmäßig auf alle Wohneinheiten × belegte Tage, unabhängig von Größe oder Personenzahl.</td></tr>
     <tr><td><strong>Direktzuordnung</strong></td><td>Der Beleg wird nicht automatisch verteilt, sondern gezielt einer oder mehreren Wohneinheiten zugewiesen (z. B. eine Reparatur, die nur eine Wohnung betrifft). Nur bei der Berechnungsart „Einfach“ wählbar, da nur dort einzelne Belege existieren.</td></tr>
-    <tr><td><strong>Wohneinheitenzähler</strong></td><td>Verteilung nach dem individuellen Verbrauch laut den <a href="#zaehlerstaende-de">Zählerständen der einzelnen Wohneinheiten</a>. Zwischen zwei Ablesungen wird linear interpoliert.</td></tr>
+    <tr><td><strong>Wohneinheitenzähler</strong></td><td>Verteilung nach dem individuellen Verbrauch laut den <a href="#zaehlerstaende-de">Zählerständen der einzelnen Wohneinheiten</a>. Hat eine Wohneinheit mehrere Zähler, zählt die Summe ihrer Verbräuche. Zwischen zwei Ablesungen wird linear interpoliert.</td></tr>
   </table>
   </div>
 
@@ -306,15 +307,34 @@
     <dt>Kostenart</dt>
     <dd>Bei Wohneinheiten-Zählern, sofern Sie nicht bereits aus einer bestimmten Kostenart heraus erfassen. Zur Auswahl stehen nur Kostenarten mit dem Verteilerschlüssel „Wohneinheitenzähler“.</dd>
     <dt>Datum</dt>
-    <dd>Ablesedatum. Pro Kostenart und Zähler lässt sich nicht zweimal am selben Tag ablesen, da sonst nicht eindeutig wäre, welcher Wert gilt.</dd>
+    <dd>Ablesedatum. Ein Zählerstand gilt als Stand <strong>am Ende</strong> des Ablesetags (siehe <a href="#verbrauch-de">So berechnet die App den Verbrauch</a>). Pro Kostenart und Zähler lässt sich nicht zweimal am selben Tag ablesen, da sonst nicht eindeutig wäre, welcher Wert gilt.</dd>
     <dt>Zählerstand</dt>
     <dd>Der abgelesene Zählerstand – nicht der Verbrauch. Die Einheit (z. B. m³) wird aus der Kostenart übernommen. Den Verbrauch berechnet die App selbst als Differenz zur vorherigen Ablesung. Innerhalb eines Zählers darf ein Stand nie niedriger sein als der vorherige; bei einem neuen Zähler erfassen Sie einen <a href="#zaehlerwechsel-de">Zählerwechsel</a>.</dd>
     <dt>Zwischenablesung</dt>
-    <dd>Nur bei Wohneinheiten-Zählern. Kennzeichnet eine außerplanmäßige Ablesung, typischerweise beim Mieterwechsel, damit der Verbrauch korrekt zwischen altem und neuem Mieter aufgeteilt wird.</dd>
+    <dd>Nur bei Wohneinheiten-Zählern. Kennzeichnet eine außerplanmäßige Ablesung, typischerweise beim Mieterwechsel. Die Kennzeichnung dient der Übersicht: In die Berechnung geht jede Ablesung gleich ein, auch Ablesungen mitten im Jahr beim Objekt-Zähler.</dd>
     <dt>Anhang</dt>
     <dd>Optional ein Foto oder eine PDF-Datei des Zählers bzw. Ableseprotokolls zur eigenen Dokumentation.</dd>
   </dl>
   <div class="note">Sobald ein Kalenderjahr finalisiert wurde, lassen sich Zählerstände aus diesem und allen früheren Jahren nicht mehr anlegen, bearbeiten oder löschen – so bleibt eine erstellte Abrechnung nachvollziehbar.</div>
+
+  <h3 id="verbrauch-de">So berechnet die App den Verbrauch</h3>
+  <p>Ein Zählerstand gilt als Stand am <strong>Ende</strong> des Ablesetags. Zwischen zwei Ablesungen verteilt die App den Verbrauch gleichmäßig auf die Tage dazwischen. Der Verbrauch eines Zeitraums ist der Stand am Ende seines letzten Tages minus dem Stand am Ende des Tages davor. Alle Ablesungen werden berücksichtigt, auch solche mitten im Jahr – beim Objekt-Zähler ebenso wie bei den Wohneinheiten-Zählern. Fehlt am Anfang oder Ende eines Zeitraums eine Ablesung, rechnet die App mit dem Verlauf der nächstgelegenen Ablesungen weiter.</p>
+  <ul>
+    <li><strong>Jahresabrechnung:</strong> Ablesungen am 31.12. des Vorjahres und am 31.12. des Abrechnungsjahres ergeben den Jahresverbrauch genau.</li>
+    <li><strong>Preisänderung</strong> (z. B. neue Tarifoption ab 01.07.): Eine Ablesung am 30.06. trennt den Verbrauch genau zwischen altem und neuem Preis. Ohne sie teilt die App den Verbrauch anteilig nach Tagen auf.</li>
+    <li><strong>Mieterwechsel:</strong> Lesen Sie am Auszugstag ab – das ist der Stand am Ende des letzten Miettags. Fehlt an diesem Tag eine Ablesung, schätzt die App den Verbrauch anteilig; in der Abrechnung ist er dann mit „(geschätzt)“ gekennzeichnet.</li>
+  </ul>
+
+  <h3 id="mehrere-zaehler-de">Mehrere Zähler in einer Wohneinheit</h3>
+  <p>Hat eine Wohnung für dieselbe Kostenart mehrere Zähler, z. B. je einen Wasserzähler in Bad und Küche, öffnen Sie unter <strong>Objekt → Zählerstände</strong> die Kostenart bei der Wohneinheit, tippen auf „+“ und wählen <strong>Zähler verwalten</strong>. Dort geben Sie jedem Zähler eine Beschreibung und legen über <strong>Weiteren Zähler hinzufügen</strong> weitere Zähler an.</p>
+  <dl>
+    <dt>Beschreibung (optional)</dt>
+    <dd>Hilft beim Unterscheiden, z. B. „Bad“ oder „Küche“. Ohne Beschreibung heißen die Zähler „Zähler 1“, „Zähler 2“ usw.</dd>
+    <dt>War schon immer vorhanden / Eingebaut am</dt>
+    <dd>Nur bei einem neu hinzugefügten Zähler. Ist der Zähler erst später dazugekommen (z. B. mit einem neuen Gäste-WC), schalten Sie „War schon immer vorhanden“ aus und geben <strong>Eingebaut am</strong> und den <strong>Anfangsstand</strong> an. Die App legt dafür einen <a href="#zaehlerwechsel-de">Einbau</a> an; davor hat dieser Zähler keinen Verbrauch. Ohne Einbaudatum würde sein Verbrauch auch für die Zeit vor seiner ersten Ablesung mitgerechnet. Ein Einbaudatum in einem bereits abgerechneten Jahr ist nicht möglich.</dd>
+  </dl>
+  <p>In der Abrechnung zählt die <strong>Summe der Verbräuche</strong> aller Zähler der Wohneinheit; berechnet wird jeder Zähler für sich, die Zählerstände verschiedener Zähler werden nie zusammengezählt. Beim Erfassen eines Zählerstands oder Zählerwechsels wählen Sie den Zähler aus. Eine <strong>Zwischenablesung</strong> erfassen Sie für alle Zähler auf einmal: Tragen Sie für jeden Zähler, der an diesem Tag eingebaut ist, den Stand ein. Entfernen lassen sich nur Zähler ohne Ablesungen und Zählerwechsel.</p>
+  <div class="note"><strong>Nur bei Wohneinheiten-Zählern:</strong> Mehrere Zähler je Kostenart gibt es nur bei den Zählern der Wohneinheiten. Hat das Gebäude für dieselbe Kostenart zwei Hauptzähler, legen Sie dafür zwei verbrauchsbasierte Kostenarten an – wie bei <a href="#tarife-de">Zählern mit Hoch- und Niedertarif</a>.</div>
 
   <h2 id="zaehlerwechsel-de">Zählerwechsel: Tausch, Ausbau und Einbau</h2>
   <p>Wird ein Zähler getauscht, ausgebaut oder neu eingebaut, erfassen Sie das als <strong>Zählerwechsel</strong> – nicht als gewöhnlichen Zählerstand. Sie finden die Funktion unter <strong>Objekt → Zählerstände</strong> in der Liste des jeweiligen Zählers: Tippen Sie auf „+“ und wählen Sie <strong>Zählerwechsel erfassen</strong>. Das gilt für Objekt-Zähler ebenso wie für Wohneinheiten-Zähler. Der Zählerwechsel erscheint in der Liste an der Stelle seines Datums, zwischen den Ablesungen.</p>
@@ -349,6 +369,29 @@
   <h3>Prüfungen und Korrekturen</h3>
   <p>Die App prüft jede Eingabe und erklärt, was nicht passt: Innerhalb eines Zählers darf der Stand nie sinken (bei einem neuen Zähler erfassen Sie einen Zählerwechsel); ein Ausbau ist nur bei eingebautem Zähler möglich, ein reiner Einbau nur, wenn gerade kein Zähler eingebaut ist; am Wechseltag und in Zeiten ohne eingebauten Zähler lässt sich keine Ablesung erfassen.</p>
   <p>Einen Zählerwechsel können Sie jederzeit bearbeiten (Art, Datum, Werte). Beim Löschen weist die App darauf hin, wenn die Zählerstände danach nicht mehr zusammenpassen: Dann ist die Abrechnung erst nach erneutem Erfassen des Zählerwechsels berechenbar. Sobald ein Kalenderjahr finalisiert wurde, lassen sich Zählerwechsel aus diesem und allen früheren Jahren nicht mehr anlegen, bearbeiten oder löschen.</p>
+
+  <h2 id="import-de">Zählerstände aus Zählerstände Manager importieren</h2>
+  <p>Lesen Sie Ihre Zähler mit der App <strong>Zählerstände Manager</strong> ab, können Sie die Ablesungen samt Fotos und Zählerwechseln übernehmen, statt sie abzutippen. Exportieren Sie dazu in Zählerstände Manager die Daten des Objekts als Datei und sichern Sie sie z. B. in der Dateien-App. In Nebenkosten öffnen Sie <strong>Objekt → Zählerstände</strong>, tippen oben rechts auf „+“, wählen <strong>Aus Zählerstände Manager importieren</strong> und dann die Datei.</p>
+  <!-- TODO Release: Link zum App Store für Zählerstände Manager ergänzen, sobald er existiert (z. B. „Zählerstände Manager im App Store laden“). -->
+
+  <h3>Zuordnen</h3>
+  <dl>
+    <dt>Wohneinheiten</dt>
+    <dd>Links steht die Wohneinheit in Zählerstände Manager, rechts wählen Sie die Wohneinheit in Nebenkosten. Gleichnamige Wohneinheiten ordnet die App beim ersten Import selbst zu.</dd>
+    <dt>Übernehmen in</dt>
+    <dd>Für jeden Zähler aus Zählerstände Manager (dort „Messstelle“) wählen Sie das Ziel: bei einem Gebäudezähler eine verbrauchsbasierte Kostenart, bei einem Zähler einer Wohneinheit eine Kostenart mit dem Verteilerschlüssel „Wohneinheitenzähler“ – entweder den <strong>bisherigen Zähler</strong> der Wohneinheit oder einen <strong>weiteren Zähler</strong> (siehe <a href="#mehrere-zaehler-de">Mehrere Zähler in einer Wohneinheit</a>). Was auf „Nicht importieren“ steht, wird nicht übernommen. Hat ein Zähler zwei Zählwerke (HT/NT), ordnen Sie jedes einzeln zu.</dd>
+  </dl>
+  <p>Die Einheit muss übereinstimmen (z. B. kWh); Werte werden nicht umgerechnet. Zählerwechsel aus Zählerstände Manager werden als Tausch, Ausbau oder Einbau übernommen.</p>
+
+  <h3>Vorschau</h3>
+  <p>Unter jedem Zähler zeigt die App sofort, was passiert: <strong>Wird übernommen</strong> mit der Zahl neuer und bereits vorhandener Einträge, oder <strong>Wird nicht übernommen</strong> mit dem Grund, etwa weil ein Zählerstand sinken würde oder die Einheit nicht passt. Ein Zähler wird immer ganz oder gar nicht übernommen. Einträge, die schon vorhanden sind (gleicher Tag, gleicher Wert), erkennt die App und legt sie nicht doppelt an. Vor dem Import zeigt sie noch einmal, wie viele Zählerstände und Zählerwechsel neu hinzukommen.</p>
+
+  <h3>Konflikte</h3>
+  <p>Gibt es für denselben Zähler und Tag schon einen Eintrag mit anderem Wert, zeigt die App beide Werte nebeneinander. Sie entscheiden für jeden Konflikt einzeln: <strong>Lokal behalten</strong> (Standard) oder <strong>Datei übernehmen</strong>. Ein vorhandenes Foto bleibt dabei immer erhalten.</p>
+  <div class="note"><strong>Ihre Daten bleiben geschützt:</strong> Der Import ergänzt nur. Er löscht nichts und ändert vorhandene Einträge ausschließlich bei Konflikten, für die Sie „Datei übernehmen“ wählen. Bereits abgerechnete Jahre bleiben unberührt: Neue Einträge dort werden übersprungen (liegt ein solcher Eintrag im exportierten Zeitraum, wird der Zähler nicht übernommen), und Konflikte dort lassen sich nicht zugunsten der Datei entscheiden.</div>
+
+  <h3>Später erneut importieren</h3>
+  <p>Nach der nächsten Ablesung importieren Sie einfach eine neue Datei. Die App merkt sich die Zuordnung und schlägt sie vor; bereits übernommene Einträge erkennt sie als vorhanden. Behalten Sie dieselbe Zuordnung bei: Ordnen Sie einen schon importierten Zähler einem anderen Ziel zu, wird er nicht übernommen, damit kein Verbrauch doppelt zählt.</p>
 
   <h2 id="belege-de">Belege erfassen</h2>
   <p>Ein <strong>Beleg</strong> ist eine einzelne Ausgabe für eine Kostenart mit der Berechnungsart „Einfach“, z. B. eine Rechnung des Hausmeisters. Sie erfassen Belege im Tab <strong>Belege</strong>.</p>
@@ -442,7 +485,7 @@
   <p>Sie können die App-Sprache (Systemsprache, Deutsch, English oder Français) und das Erscheinungsbild (Systemeinstellung, Hell oder Dunkel) unabhängig von den Geräteeinstellungen festlegen. Die Sprache betrifft nur die Oberfläche der App – erzeugte PDFs bleiben immer Deutsch.</p>
 
   <h3>Sicherung</h3>
-  <p>Über <strong>Backup erstellen</strong> exportieren Sie den kompletten Datenbestand aller Objekte – Wohneinheiten, Mietverhältnisse, Kostenarten, Belege, Zählerstände und Abrechnungen sowie die App-Einstellungen – als einzelne Datei, die Sie z. B. in der Dateien-App, per AirDrop oder per E-Mail sichern können. Über <strong>Backup wiederherstellen</strong> spielen Sie eine solche Datei wieder ein.</p>
+  <p>Über <strong>Backup erstellen</strong> exportieren Sie den kompletten Datenbestand aller Objekte – Wohneinheiten, Mietverhältnisse, Kostenarten, Belege, Zählerstände und Abrechnungen sowie die App-Einstellungen – als einzelne Datei, die Sie z. B. in der Dateien-App, per AirDrop oder per E-Mail sichern können. Über <strong>Backup wiederherstellen</strong> spielen Sie eine solche Datei wieder ein. Ein Backup, das mehrere Zähler in einer Wohneinheit oder Zuordnungen aus einem Import enthält, lässt sich erst ab App-Version 1.2.0 wiederherstellen.</p>
   <div class="note"><strong>Achtung:</strong> Die Wiederherstellung ersetzt alle aktuell auf dem Gerät vorhandenen Daten vollständig durch den Inhalt des Backups. Sichern Sie daher den aktuellen Stand, bevor Sie ein älteres Backup einspielen. Da Ihre Daten ausschließlich auf dem Gerät liegen, sind regelmäßige Backups die einzige Absicherung gegen Geräteverlust.</div>
 
   <p><strong>Hinweis:</strong> Nebenkosten bietet keine Steuer- oder Rechtsberatung. Für die inhaltliche und rechtliche Richtigkeit der erstellten Betriebskostenabrechnungen sind Sie als Vermieter selbst verantwortlich.</p>
@@ -452,7 +495,7 @@
   <!-- ============================== ENGLISH ============================== -->
   <section data-lang="en">
   <h1>User Guide</h1>
-  <p class="updated">Last updated: November 8, 2026 · App version 1.1.0</p>
+  <p class="updated">Last updated: November 9, 2026 · App version 1.2.0</p>
 
   <p>This guide walks through the entire app – from creating your first property to the finished PDF of the utility cost statement (German: <em>Betriebskostenabrechnung</em>). Every screen and every input field is explained where it first appears.</p>
 
@@ -467,6 +510,7 @@
       <li><a href="#tarife-en">Tariff options</a></li>
       <li><a href="#zaehlerstaende-en">Recording meter readings</a></li>
       <li><a href="#zaehlerwechsel-en">Meter changes: replacement, removal, and installation</a></li>
+      <li><a href="#import-en">Importing readings from Zählerstände Manager</a></li>
       <li><a href="#belege-en">Recording expenses</a></li>
       <li><a href="#abrechnung-en">Creating a statement</a></li>
       <li><a href="#ergebnis-en">The finished statement &amp; PDF export</a></li>
@@ -614,7 +658,7 @@
     <tr><td><strong>Number of occupants</strong></td><td>By occupants × occupied days, see the <a href="#mietverhaeltnisse-en">occupant-count history</a>. Vacant units are included using the property's assumed occupancy.</td></tr>
     <tr><td><strong>Number of units</strong></td><td>Evenly across all units × occupied days, regardless of size or occupant count.</td></tr>
     <tr><td><strong>Direct assignment</strong></td><td>The expense is not allocated automatically but assigned to one or more specific units (e.g. a repair affecting only one apartment). Only selectable with the "Simple" method, since only there do individual expenses exist.</td></tr>
-    <tr><td><strong>Unit meter</strong></td><td>Allocation by each apartment's individual consumption according to its <a href="#zaehlerstaende-en">unit meter readings</a>. Consumption between two readings is interpolated linearly.</td></tr>
+    <tr><td><strong>Unit meter</strong></td><td>Allocation by each apartment's individual consumption according to its <a href="#zaehlerstaende-en">unit meter readings</a>. If a unit has several meters, the sum of their consumption counts. Consumption between two readings is interpolated linearly.</td></tr>
   </table>
   </div>
 
@@ -650,15 +694,34 @@
     <dt>Cost type</dt>
     <dd>For unit meters, unless you are already recording from within a specific cost type. Only cost types using the "Unit meter" allocation key can be selected.</dd>
     <dt>Date</dt>
-    <dd>Reading date. A cost type and meter cannot be read twice on the same day, as it would otherwise be ambiguous which value applies.</dd>
+    <dd>Reading date. A meter reading counts as the value <strong>at the end</strong> of the reading day (see <a href="#verbrauch-en">How the app calculates consumption</a>). A cost type and meter cannot be read twice on the same day, as it would otherwise be ambiguous which value applies.</dd>
     <dt>Meter reading</dt>
     <dd>The value shown on the meter – not the consumption. The unit (e.g. m³) is taken from the cost type. The app calculates consumption itself as the difference from the previous reading. Within one meter a value must never be lower than the previous one; for a new meter, record a <a href="#zaehlerwechsel-en">meter change</a>.</dd>
     <dt>Interim reading</dt>
-    <dd>Unit meters only. Marks an unscheduled reading, typically at a tenant change, so consumption is split correctly between the outgoing and incoming tenant.</dd>
+    <dd>Unit meters only. Marks an unscheduled reading, typically at a tenant change. The flag is for your overview: every reading counts equally in the calculation, including mid-year readings of a property meter.</dd>
     <dt>Attachment</dt>
     <dd>Optionally a photo or PDF file of the meter or reading record, for your own documentation.</dd>
   </dl>
   <div class="note">Once a calendar year has been finalized, meter readings from that year and all earlier years can no longer be added, edited, or deleted – this keeps a completed statement traceable.</div>
+
+  <h3 id="verbrauch-en">How the app calculates consumption</h3>
+  <p>A meter reading counts as the value at the <strong>end</strong> of the reading day. Between two readings, the app spreads consumption evenly over the days in between. The consumption of a period is the value at the end of its last day minus the value at the end of the day before it. All readings are taken into account, including mid-year readings – for the property meter as well as for unit meters. If a reading is missing at the start or end of a period, the app continues with the trend of the nearest readings.</p>
+  <ul>
+    <li><strong>Annual statement:</strong> readings on December 31 of the previous year and on December 31 of the statement year give the exact annual consumption.</li>
+    <li><strong>Price change</strong> (e.g. a new tariff option from July 1): a reading on June 30 splits consumption exactly between the old and the new price. Without it, the app splits consumption proportionally by days.</li>
+    <li><strong>Tenant change:</strong> take a reading on the move-out day – that is the value at the end of the last day of the tenancy. If no reading exists for that day, the app estimates consumption proportionally; the statement then marks it as "(estimated)".</li>
+  </ul>
+
+  <h3 id="mehrere-zaehler-en">Several meters in one unit</h3>
+  <p>If an apartment has several meters for the same cost type, e.g. one water meter in the bathroom and one in the kitchen, open the cost type for the unit under <strong>Property → Meter readings</strong>, tap "+", and choose <strong>Manage meters</strong>. There you give each meter a description and add more meters via <strong>Add another meter</strong>.</p>
+  <dl>
+    <dt>Description (optional)</dt>
+    <dd>Helps tell the meters apart, e.g. "Bathroom" or "Kitchen". Without a description, the meters are called "Meter 1", "Meter 2", and so on.</dd>
+    <dt>Has always been installed / Installed on</dt>
+    <dd>Only for a newly added meter. If the meter was added later (e.g. with a new guest toilet), turn off "Has always been installed" and enter <strong>Installed on</strong> and the <strong>Initial reading</strong>. The app records an <a href="#zaehlerwechsel-en">installation</a> for it; before that, this meter has no consumption. Without an installation date, its consumption would also be counted for the time before its first reading. An installation date in an already billed year is not possible.</dd>
+  </dl>
+  <p>The statement uses the <strong>sum of the consumption</strong> of all meters of the unit; each meter is calculated on its own, and readings of different meters are never added together. When recording a meter reading or a meter change, you select the meter. An <strong>interim reading</strong> is recorded for all meters at once: enter the value for every meter installed on that day. Only meters without readings and meter changes can be removed.</p>
+  <div class="note"><strong>Unit meters only:</strong> several meters per cost type are only available for unit meters. If the building has two main meters for the same cost type, create two consumption-based cost types for them – as with <a href="#tarife-en">peak and off-peak meters</a>.</div>
 
   <h2 id="zaehlerwechsel-en">Meter changes: replacement, removal, and installation</h2>
   <p>When a meter is replaced, removed, or newly installed, record it as a <strong>meter change</strong> – not as an ordinary meter reading. You find the function under <strong>Property → Meter readings</strong> in the list of the respective meter: tap "+" and choose <strong>Record meter change</strong>. This applies to property meters as well as unit meters. The meter change appears in the list at the position of its date, between the readings.</p>
@@ -693,6 +756,29 @@
   <h3>Checks and corrections</h3>
   <p>The app checks every entry and explains what does not fit: within a single meter the value must never decrease (for a new meter, record a meter change); a removal is only possible while a meter is installed, a pure installation only while none is; no reading can be recorded on the day of a change or during times without an installed meter.</p>
   <p>You can edit a meter change at any time (type, date, values). When deleting, the app points out if the readings no longer fit together afterwards: the statement can then only be calculated after the meter change has been recorded again. Once a calendar year has been finalized, meter changes from that year and all earlier years can no longer be added, edited, or deleted.</p>
+
+  <h2 id="import-en">Importing readings from Zählerstände Manager</h2>
+  <p>If you read your meters with the <strong>Zählerstände Manager</strong> app, you can take over the readings including photos and meter changes instead of typing them in. In Zählerstände Manager, export the property's data as a file and save it, e.g. in the Files app. In Nebenkosten, open <strong>Property → Meter readings</strong>, tap "+" at the top right, choose <strong>Import from Zählerstände Manager</strong>, and then the file.</p>
+  <!-- TODO Release: Link zum App Store für Zählerstände Manager ergänzen, sobald er existiert (z. B. „Zählerstände Manager im App Store laden“). -->
+
+  <h3>Assigning</h3>
+  <dl>
+    <dt>Units</dt>
+    <dd>On the left is the unit in Zählerstände Manager; on the right you choose the unit in Nebenkosten. Units with the same name are assigned automatically on the first import.</dd>
+    <dt>Import into</dt>
+    <dd>For each meter from Zählerstände Manager (called a "metering point" there), you choose the target: for a building meter a consumption-based cost type, for a meter of a unit a cost type with the "Unit meter" allocation key – either the unit's <strong>existing meter</strong> or an <strong>additional meter</strong> (see <a href="#mehrere-zaehler-en">Several meters in one unit</a>). Anything set to "Don't import" is not imported. If a meter has two registers (peak/off-peak), assign each one separately.</dd>
+  </dl>
+  <p>The unit must match (e.g. kWh); values are not converted. Meter changes from Zählerstände Manager are imported as a replacement, removal, or installation.</p>
+
+  <h3>Preview</h3>
+  <p>Below each meter, the app immediately shows what will happen: <strong>Will be imported</strong> with the number of new and already present entries, or <strong>Will not be imported</strong> with the reason, for instance because a reading would decrease or the unit does not match. A meter is always imported completely or not at all. Entries that already exist (same day, same value) are recognized and not created twice. Before importing, the app shows once more how many meter readings and meter changes will be added.</p>
+
+  <h3>Conflicts</h3>
+  <p>If an entry with a different value already exists for the same meter and day, the app shows both values side by side. You decide for each conflict individually: <strong>Keep local</strong> (default) or <strong>Use file</strong>. An existing photo is always kept.</p>
+  <div class="note"><strong>Your data stays protected:</strong> the import only adds. It deletes nothing and changes existing entries only for conflicts where you choose "Use file". Years that have already been billed remain untouched: new entries there are skipped (if such an entry lies within the exported period, the meter is not imported), and conflicts there cannot be decided in favor of the file.</div>
+
+  <h3>Importing again later</h3>
+  <p>After the next reading, simply import a new file. The app remembers the assignment and suggests it; entries that were already imported are recognized as present. Keep the same assignment: if you assign an already imported meter to a different target, it is not imported, so that no consumption is counted twice.</p>
 
   <h2 id="belege-en">Recording expenses</h2>
   <p>An <strong>expense</strong> is a single expenditure for a cost type using the "Simple" method, e.g. an invoice from the caretaker. You record expenses in the <strong>Expenses</strong> tab.</p>
@@ -786,7 +872,7 @@
   <p>You can set the app language (system language, Deutsch, English, or Français) and appearance (system setting, light, or dark) independently of your device settings. The language only affects the app's interface – generated PDFs always stay in German.</p>
 
   <h3>Backup</h3>
-  <p><strong>Create backup</strong> exports the complete dataset of all properties – units, tenancies, cost types, expenses, meter readings, and statements, as well as the app settings – as a single file that you can store via the Files app, AirDrop, or email. <strong>Restore backup</strong> imports such a file again.</p>
+  <p><strong>Create backup</strong> exports the complete dataset of all properties – units, tenancies, cost types, expenses, meter readings, and statements, as well as the app settings – as a single file that you can store via the Files app, AirDrop, or email. <strong>Restore backup</strong> imports such a file again. A backup that contains several meters in one unit or assignments from an import can only be restored with app version 1.2.0 or later.</p>
   <div class="note"><strong>Warning:</strong> Restoring completely replaces all data currently on the device with the backup's contents. Back up the current state before importing an older backup. Since your data lives solely on the device, regular backups are the only protection against losing it.</div>
 
   <p><strong>Note:</strong> Nebenkosten does not provide tax or legal advice. As the landlord, you are solely responsible for the factual and legal accuracy of the utility cost statements you create.</p>
@@ -796,7 +882,7 @@
   <!-- ============================== FRANÇAIS ============================== -->
   <section data-lang="fr">
   <h1>Guide d'utilisation</h1>
-  <p class="updated">Dernière mise à jour : 8 novembre 2026 · Version de l'application 1.1.0</p>
+  <p class="updated">Dernière mise à jour : 9 novembre 2026 · Version de l'application 1.2.0</p>
 
   <p>Ce guide vous accompagne à travers l'intégralité de l'application – de la création de votre premier bien jusqu'au PDF final du décompte de charges (en allemand : <em>Betriebskostenabrechnung</em>). Chaque écran et chaque champ de saisie est expliqué à l'endroit où il apparaît pour la première fois.</p>
 
@@ -811,6 +897,7 @@
       <li><a href="#tarife-fr">Options tarifaires</a></li>
       <li><a href="#zaehlerstaende-fr">Saisir les relevés de compteur</a></li>
       <li><a href="#zaehlerwechsel-fr">Changements de compteur : remplacement, dépose et pose</a></li>
+      <li><a href="#import-fr">Importer des relevés depuis Zählerstände Manager</a></li>
       <li><a href="#belege-fr">Saisir les dépenses</a></li>
       <li><a href="#abrechnung-fr">Créer un décompte</a></li>
       <li><a href="#ergebnis-fr">Le décompte finalisé et l'export PDF</a></li>
@@ -958,7 +1045,7 @@
     <tr><td><strong>Nombre d'occupants</strong></td><td>Selon le nombre d'occupants × les jours d'occupation, voir l'<a href="#mietverhaeltnisse-fr">historique du nombre d'occupants</a>. Les logements vacants sont pris en compte avec l'occupation fictive du bien.</td></tr>
     <tr><td><strong>Nombre de logements</strong></td><td>Répartition égale entre tous les logements × jours d'occupation, indépendamment de la taille ou du nombre d'occupants.</td></tr>
     <tr><td><strong>Attribution directe</strong></td><td>La dépense n'est pas répartie automatiquement, mais attribuée à un ou plusieurs logements précis (par ex. une réparation ne concernant qu'un seul logement). Sélectionnable uniquement avec la méthode « Simple », car les dépenses individuelles n'existent que là.</td></tr>
-    <tr><td><strong>Compteur de logement</strong></td><td>Répartition selon la consommation individuelle de chaque logement, d'après ses <a href="#zaehlerstaende-fr">relevés de compteur</a>. La consommation entre deux relevés est interpolée linéairement.</td></tr>
+    <tr><td><strong>Compteur de logement</strong></td><td>Répartition selon la consommation individuelle de chaque logement, d'après ses <a href="#zaehlerstaende-fr">relevés de compteur</a>. Si un logement possède plusieurs compteurs, c'est la somme de leurs consommations qui compte. La consommation entre deux relevés est interpolée linéairement.</td></tr>
   </table>
   </div>
 
@@ -994,15 +1081,34 @@
     <dt>Type de charge</dt>
     <dd>Pour les compteurs de logement, sauf si vous saisissez déjà depuis un type de charge précis. Seuls les types de charges avec la clé « compteur de logement » sont proposés.</dd>
     <dt>Date</dt>
-    <dd>Date du relevé. Un même type de charge et compteur ne peut pas être relevé deux fois le même jour, sinon la valeur applicable serait ambiguë.</dd>
+    <dd>Date du relevé. Un relevé correspond à la valeur <strong>à la fin</strong> du jour du relevé (voir <a href="#verbrauch-fr">Comment l'application calcule la consommation</a>). Un même type de charge et compteur ne peut pas être relevé deux fois le même jour, sinon la valeur applicable serait ambiguë.</dd>
     <dt>Relevé de compteur</dt>
     <dd>La valeur affichée sur le compteur – et non la consommation. L'unité (par ex. m³) est reprise du type de charge. L'application calcule elle-même la consommation comme différence avec le relevé précédent. Pour un même compteur, une valeur ne doit jamais être inférieure à la précédente ; pour un nouveau compteur, enregistrez un <a href="#zaehlerwechsel-fr">changement de compteur</a>.</dd>
     <dt>Relevé intermédiaire</dt>
-    <dd>Compteurs de logement uniquement. Signale un relevé exceptionnel, typiquement lors d'un changement de locataire, afin que la consommation soit correctement répartie entre l'ancien et le nouveau locataire.</dd>
+    <dd>Compteurs de logement uniquement. Signale un relevé exceptionnel, typiquement lors d'un changement de locataire. Ce marquage sert à la vue d'ensemble : chaque relevé compte de la même façon dans le calcul, y compris les relevés en cours d'année d'un compteur du bien.</dd>
     <dt>Pièce jointe</dt>
     <dd>Facultativement, une photo ou un fichier PDF du compteur ou du procès-verbal de relevé, pour votre propre documentation.</dd>
   </dl>
   <div class="note">Dès qu'une année civile a été finalisée, les relevés de cette année et de toutes les années antérieures ne peuvent plus être ajoutés, modifiés ni supprimés – cela garantit qu'un décompte établi reste vérifiable.</div>
+
+  <h3 id="verbrauch-fr">Comment l'application calcule la consommation</h3>
+  <p>Un relevé correspond à la valeur à la <strong>fin</strong> du jour du relevé. Entre deux relevés, l'application répartit la consommation uniformément sur les jours intermédiaires. La consommation d'une période est la valeur à la fin de son dernier jour moins la valeur à la fin du jour précédant son début. Tous les relevés sont pris en compte, y compris ceux en cours d'année – pour le compteur du bien comme pour les compteurs de logement. S'il manque un relevé au début ou à la fin d'une période, l'application poursuit selon l'évolution des relevés les plus proches.</p>
+  <ul>
+    <li><strong>Décompte annuel :</strong> des relevés au 31/12 de l'année précédente et au 31/12 de l'année du décompte donnent exactement la consommation annuelle.</li>
+    <li><strong>Changement de prix</strong> (par ex. nouvelle option tarifaire à partir du 01/07) : un relevé au 30/06 sépare exactement la consommation entre l'ancien et le nouveau prix. Sans lui, l'application répartit la consommation au prorata des jours.</li>
+    <li><strong>Changement de locataire :</strong> relevez le jour du départ – c'est la valeur à la fin du dernier jour du bail. S'il manque un relevé ce jour-là, l'application estime la consommation au prorata ; le décompte l'indique alors comme « (estimé) ».</li>
+  </ul>
+
+  <h3 id="mehrere-zaehler-fr">Plusieurs compteurs dans un logement</h3>
+  <p>Si un logement possède plusieurs compteurs pour le même type de charge, par ex. un compteur d'eau dans la salle de bains et un dans la cuisine, ouvrez le type de charge du logement sous <strong>Bien → Relevés de compteur</strong>, touchez « + » et choisissez <strong>Gérer les compteurs</strong>. Vous y donnez une description à chaque compteur et en ajoutez d'autres via <strong>Ajouter un autre compteur</strong>.</p>
+  <dl>
+    <dt>Description (facultative)</dt>
+    <dd>Aide à distinguer les compteurs, par ex. « Salle de bains » ou « Cuisine ». Sans description, ils s'appellent « Compteur 1 », « Compteur 2 », etc.</dd>
+    <dt>Toujours installé / Installé le</dt>
+    <dd>Uniquement pour un compteur nouvellement ajouté. Si le compteur a été ajouté plus tard (par ex. avec de nouveaux WC invités), désactivez « Toujours installé » et indiquez <strong>Installé le</strong> ainsi que le <strong>Relevé initial</strong>. L'application enregistre pour cela une <a href="#zaehlerwechsel-fr">pose</a> ; auparavant, ce compteur n'a aucune consommation. Sans date de pose, sa consommation serait aussi comptée pour la période précédant son premier relevé. Une date de pose dans une année déjà décomptée n'est pas possible.</dd>
+  </dl>
+  <p>Le décompte utilise la <strong>somme des consommations</strong> de tous les compteurs du logement ; chaque compteur est calculé séparément, les relevés de compteurs différents ne sont jamais additionnés. Lors de la saisie d'un relevé ou d'un changement de compteur, vous choisissez le compteur. Un <strong>relevé intermédiaire</strong> se saisit pour tous les compteurs à la fois : indiquez la valeur de chaque compteur posé ce jour-là. Seuls les compteurs sans relevé ni changement de compteur peuvent être supprimés.</p>
+  <div class="note"><strong>Compteurs de logement uniquement :</strong> plusieurs compteurs par type de charge ne sont possibles que pour les compteurs de logement. Si le bâtiment possède deux compteurs principaux pour le même type de charge, créez deux types de charges basés sur la consommation – comme pour les <a href="#tarife-fr">compteurs à heures pleines et heures creuses</a>.</div>
 
   <h2 id="zaehlerwechsel-fr">Changements de compteur : remplacement, dépose et pose</h2>
   <p>Lorsqu'un compteur est remplacé, déposé ou nouvellement posé, enregistrez-le comme <strong>changement de compteur</strong> – et non comme un simple relevé. Vous trouvez la fonction sous <strong>Bien → Relevés de compteur</strong>, dans la liste du compteur concerné : appuyez sur « + » et choisissez <strong>Enregistrer un changement de compteur</strong>. Cela vaut pour les compteurs du bien comme pour les compteurs de logement. Le changement apparaît dans la liste à l'endroit de sa date, entre les relevés.</p>
@@ -1037,6 +1143,29 @@
   <h3>Contrôles et corrections</h3>
   <p>L'application contrôle chaque saisie et explique ce qui ne convient pas : pour un même compteur, la valeur ne doit jamais diminuer (pour un nouveau compteur, enregistrez un changement de compteur) ; une dépose n'est possible que si un compteur est posé, une simple pose seulement si aucun ne l'est ; aucun relevé ne peut être saisi le jour d'un changement ni pendant les périodes sans compteur posé.</p>
   <p>Vous pouvez modifier un changement de compteur à tout moment (type, date, valeurs). Lors de la suppression, l'application vous avertit si les relevés ne sont plus cohérents ensuite : le décompte ne peut alors être calculé qu'après avoir enregistré à nouveau le changement de compteur. Dès qu'une année civile a été finalisée, les changements de compteur de cette année et de toutes les années antérieures ne peuvent plus être ajoutés, modifiés ni supprimés.</p>
+
+  <h2 id="import-fr">Importer des relevés depuis Zählerstände Manager</h2>
+  <p>Si vous relevez vos compteurs avec l'app <strong>Zählerstände Manager</strong>, vous pouvez reprendre les relevés avec leurs photos et changements de compteur au lieu de les ressaisir. Dans Zählerstände Manager, exportez les données du bien dans un fichier et enregistrez-le, par ex. dans l'app Fichiers. Dans Nebenkosten, ouvrez <strong>Bien → Relevés de compteur</strong>, touchez « + » en haut à droite, choisissez <strong>Importer depuis Zählerstände Manager</strong>, puis le fichier.</p>
+  <!-- TODO Release: Link zum App Store für Zählerstände Manager ergänzen, sobald er existiert (z. B. „Zählerstände Manager im App Store laden“). -->
+
+  <h3>Attribuer</h3>
+  <dl>
+    <dt>Logements</dt>
+    <dd>À gauche figure l'unité dans Zählerstände Manager ; à droite, vous choisissez l'unité dans Nebenkosten. Les unités portant le même nom sont attribuées automatiquement lors de la première importation.</dd>
+    <dt>Importer dans</dt>
+    <dd>Pour chaque compteur de Zählerstände Manager (appelé « point de comptage »), vous choisissez la cible : pour un compteur du bâtiment, un type de charge basé sur la consommation ; pour un compteur de logement, un type de charge avec la clé « compteur de logement » – soit le <strong>compteur existant</strong> du logement, soit un <strong>compteur supplémentaire</strong> (voir <a href="#mehrere-zaehler-fr">Plusieurs compteurs dans un logement</a>). Ce qui est réglé sur « Ne pas importer » n'est pas repris. Si un compteur possède deux registres (HP/HC), attribuez chacun séparément.</dd>
+  </dl>
+  <p>L'unité doit correspondre (par ex. kWh) ; les valeurs ne sont pas converties. Les changements de compteur de Zählerstände Manager sont repris comme remplacement, dépose ou pose.</p>
+
+  <h3>Aperçu</h3>
+  <p>Sous chaque compteur, l'application indique immédiatement ce qui va se passer : <strong>Sera importé</strong>, avec le nombre d'entrées nouvelles et déjà présentes, ou <strong>Ne sera pas importé</strong>, avec la raison, par exemple parce qu'un relevé diminuerait ou que l'unité ne correspond pas. Un compteur est toujours importé entièrement ou pas du tout. Les entrées déjà présentes (même jour, même valeur) sont reconnues et ne sont pas créées en double. Avant l'importation, l'application indique encore combien de relevés et de changements de compteur seront ajoutés.</p>
+
+  <h3>Conflits</h3>
+  <p>S'il existe déjà une entrée avec une autre valeur pour le même compteur et le même jour, l'application affiche les deux valeurs côte à côte. Vous décidez pour chaque conflit : <strong>Garder local</strong> (par défaut) ou <strong>Reprendre le fichier</strong>. Une photo existante est toujours conservée.</p>
+  <div class="note"><strong>Vos données restent protégées :</strong> l'importation ne fait qu'ajouter. Elle ne supprime rien et ne modifie des entrées existantes que pour les conflits où vous choisissez « Reprendre le fichier ». Les années déjà décomptées restent intactes : les nouvelles entrées y sont ignorées (si une telle entrée se situe dans la période exportée, le compteur n'est pas importé), et les conflits portant sur ces années ne peuvent pas être tranchés en faveur du fichier.</div>
+
+  <h3>Importer à nouveau plus tard</h3>
+  <p>Après le relevé suivant, importez simplement un nouveau fichier. L'application mémorise l'attribution et la propose ; les entrées déjà reprises sont reconnues comme présentes. Conservez la même attribution : si vous attribuez un compteur déjà importé à une autre cible, il n'est pas importé, afin qu'aucune consommation ne soit comptée deux fois.</p>
 
   <h2 id="belege-fr">Saisir les dépenses</h2>
   <p>Une <strong>dépense</strong> est une charge individuelle pour un type de charge utilisant la méthode « Simple », par ex. une facture du concierge. Vous saisissez les dépenses dans l'onglet <strong>Dépenses</strong>.</p>
@@ -1130,7 +1259,7 @@
   <p>Vous pouvez définir la langue de l'application (langue du système, Deutsch, English ou Français) et l'apparence (réglage système, clair ou sombre) indépendamment des réglages de l'appareil. La langue ne concerne que l'interface – les PDF générés restent toujours en allemand.</p>
 
   <h3>Sauvegarde</h3>
-  <p><strong>Créer une sauvegarde</strong> exporte l'ensemble des données de tous les biens – logements, baux, types de charges, dépenses, relevés de compteur et décomptes, ainsi que les réglages de l'application – dans un fichier unique que vous pouvez conserver via l'app Fichiers, AirDrop ou par e-mail. <strong>Restaurer une sauvegarde</strong> réimporte un tel fichier.</p>
+  <p><strong>Créer une sauvegarde</strong> exporte l'ensemble des données de tous les biens – logements, baux, types de charges, dépenses, relevés de compteur et décomptes, ainsi que les réglages de l'application – dans un fichier unique que vous pouvez conserver via l'app Fichiers, AirDrop ou par e-mail. <strong>Restaurer une sauvegarde</strong> réimporte un tel fichier. Une sauvegarde contenant plusieurs compteurs dans un logement ou des attributions issues d'une importation ne peut être restaurée qu'avec la version 1.2.0 ou ultérieure de l'application.</p>
   <div class="note"><strong>Attention :</strong> la restauration remplace intégralement toutes les données présentes sur l'appareil par le contenu de la sauvegarde. Sauvegardez donc l'état actuel avant d'importer une sauvegarde plus ancienne. Vos données résidant uniquement sur l'appareil, des sauvegardes régulières sont la seule protection contre leur perte.</div>
 
   <p><strong>Remarque :</strong> Nebenkosten ne fournit aucun conseil fiscal ou juridique. En tant que bailleur, vous êtes seul responsable de l'exactitude du contenu et de la conformité juridique des décomptes de charges que vous établissez.</p>
