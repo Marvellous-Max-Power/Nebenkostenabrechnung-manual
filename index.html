@@ -108,7 +108,7 @@
   <!-- ============================== DEUTSCH ============================== -->
   <section data-lang="de" class="active">
   <h1>Benutzerhandbuch</h1>
-  <p class="updated">Stand: 9. November 2026 · App-Version 1.2.0</p>
+  <p class="updated">Stand: 12. November 2026 · App-Version 1.2.0</p>
 
   <p>Dieses Handbuch führt einmal komplett durch die App – vom Anlegen des ersten Objekts bis zum fertigen PDF der Betriebskostenabrechnung. Jeder Bildschirm und jedes Eingabefeld wird an der Stelle erklärt, an der es zum ersten Mal vorkommt.</p>
 
@@ -170,15 +170,25 @@
   <p>Direkt nach dem Anlegen befüllt die App das Objekt automatisch mit dem Standard-Katalog der <a href="#kostenarten-de">Kostenarten</a>.</p>
 
   <h3>Stammdaten ergänzen</h3>
-  <p>Unter <strong>Objekt → Stammdaten</strong> lassen sich die obigen Angaben jederzeit ändern und um zwei wichtige Felder ergänzen. Änderungen werden hier sofort gespeichert, es gibt keinen „Sichern“-Button.</p>
+  <p>Unter <strong>Objekt → Stammdaten</strong> lassen sich die obigen Angaben jederzeit ändern und um weitere Felder ergänzen. Änderungen werden hier sofort gespeichert, es gibt keinen „Sichern“-Button.</p>
   <dl>
     <dt>Währung</dt>
-    <dd>Euro, US-Dollar oder Britisches Pfund. Bestimmt nur, mit welchem Symbol Beträge in der App und im PDF angezeigt werden – gespeicherte Beträge selbst ändern sich dadurch nicht. Wird die Währung nachträglich geändert, werden auch bereits abgeschlossene Abrechnungen mit dem neuen Symbol angezeigt.</dd>
+    <dd>Euro, US-Dollar oder Britisches Pfund. Bestimmt nur, mit welchem Symbol Beträge in der App und im PDF angezeigt werden – gespeicherte Beträge selbst ändern sich dadurch nicht. Abrechnungen, die ab Version 1.2.0 abgeschlossen werden, behalten die Währung, die beim Abschließen eingestellt war; nur Abrechnungen, die mit einer älteren Version abgeschlossen wurden, erscheinen nach einer Änderung mit dem neuen Symbol.</dd>
     <dt>Vermieter</dt>
     <dd>Mehrzeiliges Freitextfeld für Name und Adresse des Vermieters (bzw. der Hausverwaltung). Dieser Text erscheint als Absender auf jeder PDF-Abrechnung – ohne ihn bleibt das Absenderfeld leer.</dd>
     <dt>Anzahl Wohneinheiten</dt>
     <dd>Wird nur angezeigt und ergibt sich automatisch aus den angelegten Wohneinheiten.</dd>
   </dl>
+  <p>Im Abschnitt <strong>Zahlung</strong> legen Sie fest, was das PDF zum Ausgleich von Nachzahlung und Guthaben schreibt:</p>
+  <dl>
+    <dt>Zahlungsfrist</dt>
+    <dd>1 bis 90 Tage, voreingestellt sind 14 Tage („innerhalb von zwei Wochen“). Gilt für die Überweisung einer Nachzahlung und die Auszahlung eines Guthabens.</dd>
+    <dt>Kontoinhaber und IBAN (optional)</dt>
+    <dd>Ist eine IBAN eingetragen, nennt das PDF bei einer Nachzahlung diese Bankverbindung; sonst steht dort wie bisher „auf das Ihnen bekannte Mietkonto“. Eine IBAN mit Tippfehler (falsche Prüfziffer) wird markiert, aber nicht abgelehnt.</dd>
+    <dt>Hinweis auf Einwendungsfrist</dt>
+    <dd>Standardmäßig an: Das PDF weist in der Fußzeile darauf hin, dass Einwendungen gegen die Abrechnung spätestens bis zum Ablauf des zwölften Monats nach Zugang mitzuteilen sind (§ 556 Abs. 3 BGB).</dd>
+  </dl>
+  <div class="note"><strong>Eingefroren beim Abschließen:</strong> Vermieter, Objektadresse, Währung und Zahlungsangaben werden ab Version 1.2.0 beim Abschließen einer Abrechnung in diese übernommen. Spätere Änderungen in den Stammdaten wirken nur auf künftige Abrechnungen – das PDF einer abgeschlossenen Abrechnung sieht immer so aus wie beim Versand. Abrechnungen, die mit einer älteren Version abgeschlossen wurden, behalten ihren bisherigen Inhalt und zeigen weiter die aktuellen Stammdaten.</div>
 
   <h3>Leerstand &amp; Selbstnutzung</h3>
   <p>Über <strong>Objekt → Leerstand &amp; Selbstnutzung</strong> legen Sie die <strong>fiktive Belegung</strong> fest (0 bis 20 Personen): die Personenzahl, mit der eine Wohneinheit ohne aktives Mietverhältnis (Leerstand oder Eigennutzung) beim Verteilerschlüssel „Personenzahl“ berücksichtigt wird. Ohne diesen Wert würde eine leerstehende Wohnung mit 0 Personen zählen, wodurch sich der Verteilungsnenner zugunsten des Vermieters verkleinern und die verbleibenden Mieter zu viel tragen würden. Die auf den Leerstand entfallenden Kosten trägt in der Abrechnung der Vermieter selbst.</p>
@@ -189,8 +199,11 @@
     <dt>Bezeichnung</dt>
     <dd>Pflichtfeld, freie Bezeichnung, z. B. „2. OG rechts“ oder „Wohnung 3“.</dd>
     <dt>Wohnfläche</dt>
-    <dd>Pflichtfeld, in m² und größer als 0. Wird für den Verteilerschlüssel „Wohnfläche“ verwendet und bildet zusammen mit den anderen Wohneinheiten die tatsächliche Verteilungsgrundlage.</dd>
+    <dd>Pflichtfeld, in m² und größer als 0. Wird für den Verteilerschlüssel „Wohnfläche“ verwendet und bildet zusammen mit den anderen Wohneinheiten die tatsächliche Verteilungsgrundlage. Sie gilt „von Anfang an“; ändert sich die Fläche später, nutzen Sie den Wohnflächen-Verlauf.</dd>
   </dl>
+  <h3 id="wohnflaeche-verlauf-de">Wohnflächen-Verlauf</h3>
+  <p>Ändert sich die Wohnfläche einer Wohneinheit (z. B. nach einem Ausbau), tragen Sie unter <strong>Wohneinheit → Wohnflächen-Verlauf</strong> die neue Fläche mit dem Datum ein, ab dem sie gilt. Jeder Eintrag gilt bis zum nächsten. Für jeden Tag werden die Kosten nach den an diesem Tag gültigen Flächen verteilt. Ändert sich eine Fläche innerhalb eines Abrechnungsjahres, zeigt das PDF die Abschnitte einzeln, z. B. „01.01.–30.06.: 85 m² von 250 m²“ und „01.07.–31.12.: 95 m² von 260 m²“.</p>
+  <p>Einträge mit einem Datum in einem bereits abgerechneten Jahr sind nicht möglich, da sie eine versendete Abrechnung rückwirkend verändern würden.</p>
   <div class="note"><strong>Hinweis:</strong> Eine Wohneinheit lässt sich nur löschen, solange nie ein Mietverhältnis für sie bestand, kein Beleg direkt auf sie zugeordnet wurde und keine gesperrten Zählerstände vorliegen.</div>
 
   <h2 id="mietverhaeltnisse-de">Mietverhältnisse anlegen</h2>
@@ -240,7 +253,7 @@
     <dt>Standard-Verteilerschlüssel</dt>
     <dd>Siehe Tabelle unten. Bei „Einfach“ berechneten Kostenarten lässt er sich pro Beleg überschreiben.</dd>
     <dt>Einheit</dt>
-    <dd>Nur bei der Berechnungsart „Verbrauchsbasiert“: die Verbrauchseinheit, in der Zählerstände erfasst werden (kWh, kW, m³, Liter oder Stück; oder „Keine Angabe“).</dd>
+    <dd>Bei der Berechnungsart „Verbrauchsbasiert“ und beim Verteilerschlüssel „Wohneinheitenzähler“: die Verbrauchseinheit, in der Zählerstände erfasst werden (kWh, kW, m³, Liter oder Stück; oder „Keine Angabe“). Sie erscheint auch im PDF bei der Bezugsgröße, z. B. „12,5 m³ von 148,3 m³ Verbrauch“.</dd>
     <dt>Referenz-Kostenart</dt>
     <dd>Nur bei der Berechnungsart „Abgeleitet“, dort zwingend erforderlich. Auswählbar sind nur aktive, verbrauchsbasierte Kostenarten.</dd>
     <dt>Umlagefähiger Anteil an den Gesamtkosten (optional)</dt>
@@ -262,6 +275,8 @@
   </table>
   </div>
 
+  <p>Stellen Sie eine Kostenart mit erfassten Belegen von „Einfach“ auf eine andere Berechnungsart um, fragt die App vorher nach: Diese Belege werden danach nicht mehr abgerechnet.</p>
+
   <h3>Verteilerschlüssel</h3>
   <p>Legt fest, nach welchem Maßstab die Jahreskosten dieser Kostenart auf die Mietparteien umgelegt werden.</p>
   <div class="table-wrap">
@@ -271,7 +286,7 @@
     <tr><td><strong>Personenzahl</strong></td><td>Nach Personen × belegten Tagen, siehe <a href="#mietverhaeltnisse-de">Personenzahl-Verlauf</a>. Leerstehende Wohneinheiten gehen mit der fiktiven Belegung des Objekts ein.</td></tr>
     <tr><td><strong>Anzahl Wohneinheiten</strong></td><td>Gleichmäßig auf alle Wohneinheiten × belegte Tage, unabhängig von Größe oder Personenzahl.</td></tr>
     <tr><td><strong>Direktzuordnung</strong></td><td>Der Beleg wird nicht automatisch verteilt, sondern gezielt einer oder mehreren Wohneinheiten zugewiesen (z. B. eine Reparatur, die nur eine Wohnung betrifft). Nur bei der Berechnungsart „Einfach“ wählbar, da nur dort einzelne Belege existieren.</td></tr>
-    <tr><td><strong>Wohneinheitenzähler</strong></td><td>Verteilung nach dem individuellen Verbrauch laut den <a href="#zaehlerstaende-de">Zählerständen der einzelnen Wohneinheiten</a>. Hat eine Wohneinheit mehrere Zähler, zählt die Summe ihrer Verbräuche. Zwischen zwei Ablesungen wird linear interpoliert.</td></tr>
+    <tr><td><strong>Wohneinheitenzähler</strong></td><td>Verteilung nach dem individuellen Verbrauch laut den <a href="#zaehlerstaende-de">Zählerständen der einzelnen Wohneinheiten</a>. Hat eine Wohneinheit mehrere Zähler, zählt die Summe ihrer Verbräuche. Zwischen zwei Ablesungen wird linear interpoliert. Eine <strong>abgeleitete</strong> Kostenart (z. B. Entwässerung) mit diesem Schlüssel verteilt nach den Wohnungszählern ihrer Referenz (z. B. Wasserversorgung), solange für sie selbst keine eigenen Wohnungszählerstände erfasst sind.</td></tr>
   </table>
   </div>
 
@@ -411,9 +426,13 @@
     <dt>Kostenart</dt>
     <dd>Zur Auswahl stehen nur aktive Kostenarten. Wählen Sie eine verbrauchsbasierte oder abgeleitete Kostenart, sind Betrag und Anteile gesperrt – diese Kosten entstehen aus Zählerständen und Tarifoptionen und lassen sich hier nicht manuell erfassen.</dd>
     <dt>Datum</dt>
-    <dd>Zahlungsdatum. Es bestimmt nach dem Abflussprinzip, welchem Abrechnungsjahr der Beleg zugeordnet wird.</dd>
+    <dd>Zahlungsdatum. Es bestimmt nach dem Abflussprinzip, welchem Abrechnungsjahr der Beleg zugeordnet wird – außer Sie wählen darunter ein anderes Abrechnungsjahr. Ein Datum in einem bereits abgerechneten Jahr ist nicht möglich.</dd>
+    <dt>Abrechnungsjahr</dt>
+    <dd>Voreingestellt ist „Jahr des Datums“. Gehört eine Rechnung zu einem anderen Jahr – typisch: die Rechnung für 2025 kommt und wird im Januar 2026 bezahlt –, wählen Sie hier das Jahr, in dem sie abgerechnet werden soll. Bereits abgerechnete Jahre stehen nicht zur Wahl. In der Belegliste erscheint der Beleg unter diesem Jahr.</dd>
     <dt>Gesamtbetrag</dt>
-    <dd>Der volle Rechnungsbetrag, so wie er bezahlt wurde. Pflichtfeld, muss größer als 0 sein.</dd>
+    <dd>Der volle Rechnungsbetrag, so wie er bezahlt wurde. Pflichtfeld, muss größer als 0 sein – auch bei einer Gutschrift.</dd>
+    <dt>Gutschrift</dt>
+    <dd>Für Erstattungen, z. B. eine Rückzahlung des Versorgers. Der Betrag wird positiv eingegeben und mindert die Kosten dieser Kostenart, ebenso einen angegebenen Lohnanteil (§ 35a). In Listen erscheint er mit Minuszeichen und der Kennzeichnung „Gutschrift“.</dd>
     <dt>Beschreibung</dt>
     <dd>Kurze Angabe, was der Beleg konkret ist, z. B. „Heizungswartung“ oder „Ersatzpumpe“. Hilft, mehrere Belege derselben Kostenart auseinanderzuhalten; erscheint in der Belegliste, lässt sich durchsuchen und erscheint nicht auf der Abrechnung.</dd>
     <dt>Lieferant</dt>
@@ -423,13 +442,13 @@
     <dt>Wohneinheiten (bei Direktzuordnung)</dt>
     <dd>Bei Direktzuordnung erscheint direkt darunter die Liste aller Wohneinheiten – wählen Sie mindestens eine aus, sonst lässt sich der Beleg nicht speichern.</dd>
     <dt>Umlagefähiger Anteil an den Gesamtkosten (optional)</dt>
-    <dd>Wie viel des Gesamtbetrags auf die Mieter umgelegt werden darf – als Prozentsatz (Voreinstellung 100 %) oder als fester Betrag. Nützlich z. B. bei Rechnungen, die neben umlagefähigen Betriebskosten auch nicht umlagefähige Instandhaltung enthalten.</dd>
+    <dd>Wie viel des Gesamtbetrags auf die Mieter umgelegt werden darf – als Prozentsatz (Voreinstellung 100 %) oder als fester Betrag, höchstens 100 % bzw. der Gesamtbetrag. Nützlich z. B. bei Rechnungen, die neben umlagefähigen Betriebskosten auch nicht umlagefähige Instandhaltung enthalten.</dd>
     <dt>Anteil der Lohnkosten am umlagefähigen Betrag (§ 35a) (optional)</dt>
-    <dd>Der Lohnanteil an genau diesem umlagefähigen Betrag, ebenfalls als Prozentsatz oder fester Betrag. Er erscheint separat auf der Abrechnung, damit der Mieter ihn steuerlich geltend machen kann.</dd>
+    <dd>Der Lohnanteil an genau diesem umlagefähigen Betrag, ebenfalls als Prozentsatz oder fester Betrag, höchstens der umlagefähige Betrag. Er erscheint separat auf der Abrechnung, damit der Mieter ihn steuerlich geltend machen kann.</dd>
     <dt>Mehrjähriger Turnus</dt>
     <dd>Für Kosten, die nicht jedes Jahr anfallen – nach dem Einschalten stellen Sie den Turnus auf 2 bis 10 Jahre. Das erscheint als Hinweis auf dem PDF, ändert aber nichts an der Berechnung: Der Beleg wird weiterhin vollständig im Zahlungsjahr abgerechnet (Abflussprinzip).</dd>
     <dt>Anhang</dt>
-    <dd>Foto oder PDF-Datei der Rechnung.</dd>
+    <dd>Foto oder PDF-Datei der Rechnung, auf dem iPhone auch über <strong>Dokument scannen</strong> (die gescannten Seiten werden als PDF gespeichert). Neue Fotos und Scans speichert die App verkleinert (längste Kante 2000 Pixel), damit Backups klein bleiben.</dd>
     <dt>Notiz (optional)</dt>
     <dd>Freitext zur eigenen Dokumentation; erscheint ebenfalls nicht auf der Abrechnung.</dd>
   </dl>
@@ -443,6 +462,11 @@
 
   <h3>Schritt 2 – Berechnung</h3>
   <p>Hier sehen Sie alle Kostenarten mit dem für dieses Jahr berechneten Gesamtbetrag sowie die Gesamtsumme. Bei verbrauchsbasierten und abgeleiteten Kostenarten können Sie den berechneten Betrag manuell überschreiben – etwa, wenn Ihnen die Jahresrechnung des Versorgers vorliegt und diese leicht abweicht. Tippen Sie dazu die Zeile an, geben Sie den Betrag ein und bestätigen Sie mit „Fertig“. Ein überschriebener Wert wird mit einem orangefarbenen Stift markiert und lässt sich per Wischgeste über „Zurücksetzen“ wieder auf den berechneten Wert bringen. Bei „Einfach“ berechneten Kostenarten ist der Betrag nicht überschreibbar, da er sich unmittelbar aus den erfassten Belegen ergibt – korrigieren Sie dort stattdessen die Belege.</p>
+  <p><strong>Prüfliste:</strong> Über den Kostenarten sammelt die App alle Hindernisse und Hinweise auf einmal. Ein Tipp auf einen Eintrag öffnet die betreffende Stelle (z. B. die Tarifoptionen oder die Zählerstände); nach der Rückkehr wird neu berechnet.</p>
+  <ul>
+    <li><strong>Bitte zuerst beheben</strong> – Fehler, ohne deren Behebung keine Berechnung möglich ist, etwa fehlende Tarifoptionen oder Zählerstände. Fehlen bei einer verbrauchsbasierten oder abgeleiteten Kostenart Zählerstände oder Tarife, können Sie stattdessen direkt <strong>Betrag manuell eintragen</strong> (z. B. den Betrag der Jahresrechnung). Das geht nicht bei einer Kostenart, deren Verbrauch eine abgeleitete Kostenart benötigt.</li>
+    <li><strong>Hinweise</strong> – verhindern die Berechnung nicht: ein hochgerechneter Verbrauch, weil zu Beginn oder Ende des Jahres eine Ablesung fehlt (eine Ablesung am ersten bzw. letzten Tag des Jahres genügt), eine abweichende Gesamtwohnfläche, eine fehlende Mieteranschrift oder ein leerer Vermieter-Kontakt.</li>
+  </ul>
 
   <h3>Schritt 3 – Parteien prüfen</h3>
   <p>Sie sehen alle Mietparteien des Jahres mit Kosten und dem sich ergebenden Saldo (Nachzahlung rot, Guthaben grün). Entfallen Kosten auf Leerstand oder Selbstnutzung, erscheint zusätzlich der Abschnitt „Vermieter-Eigenanteil“.</p>
@@ -451,39 +475,41 @@
     <li>den tatsächlich abgerechneten <strong>Zeitraum</strong> (bei unterjährigem Ein- oder Auszug kürzer als das Jahr),</li>
     <li>die <strong>Kostenaufstellung</strong> je Kostenart samt der zugrunde liegenden Bezugsgröße,</li>
     <li><strong>Soll</strong> – die aus dem Vorauszahlungs-Verlauf berechnete geschuldete Vorauszahlung,</li>
-    <li><strong>Ist (bearbeiten)</strong> – die tatsächlich geleistete Vorauszahlung. Voreingestellt ist der Soll-Wert; weicht die tatsächliche Zahlung ab (z. B. weil ein Monat nicht gezahlt wurde), tippen Sie das Feld an und korrigieren Sie es. Der Betrag darf nicht negativ sein. Über „Zurücksetzen auf Soll“ verwerfen Sie die Korrektur wieder,</li>
+    <li><strong>Vorauszahlung bestätigen</strong> – abgezogen werden dürfen nur tatsächlich geleistete Vorauszahlungen. Bestätigen Sie deshalb je Mietpartei mit <strong>Ja, vollständig gezahlt</strong>, oder tippen Sie <strong>Nein, gezahlten Betrag eintragen</strong> und geben Sie den tatsächlich gezahlten Jahresbetrag ein (nicht negativ). „Zurücksetzen auf Soll“ bzw. „Bestätigung zurücknehmen“ macht das wieder rückgängig,</li>
     <li>den <strong>Saldo</strong> als Ergebnis.</li>
   </ul>
+  <p>Erst wenn jede Mietpartei bestätigt ist oder einen Ist-Betrag hat, geht es mit „Weiter“ zu Schritt 4. Mietparteien ohne Soll-Vorauszahlung brauchen keine Bestätigung.</p>
 
   <h3>Schritt 4 – Finalisieren</h3>
   <p>Zum Abschluss sehen Sie die Kosten je Kostenart sowie eine Zusammenfassung aus „Summe Mietparteien“ und „Vermieter-Eigenanteil“. Weicht die in den Stammdaten hinterlegte Gesamtwohnfläche von der Summe der Wohneinheiten-Wohnflächen ab, warnt ein zusätzlicher Dialog – ein typisches Zeichen dafür, dass eine Wohneinheit fehlt. Mit „Abschließen“ wird die Abrechnung finalisiert.</p>
-  <div class="note"><strong>Was das Finalisieren bewirkt:</strong> Das Ergebnis wird dauerhaft eingefroren, und Belege, Zählerstände sowie die Mietverhältnis-Historie dieses und aller früheren Jahre werden gegen Änderungen gesperrt. Damit bleibt eine an Mieter versendete Abrechnung immer nachvollziehbar. Sollte sich später doch ein Fehler zeigen, lässt sich die Abrechnung löschen und neu erstellen – siehe <a href="#korrigieren-de">Eine Abrechnung korrigieren oder löschen</a>.</div>
+  <div class="note"><strong>Was das Finalisieren bewirkt:</strong> Das Ergebnis wird dauerhaft eingefroren – zusammen mit Vermieter, Objektadresse, Währung und Zahlungsangaben für das PDF. Zählerstände und die Mietverhältnis-Historie dieses und aller früheren Jahre sowie die Belege dieses Jahres werden gegen Änderungen gesperrt. Damit bleibt eine an Mieter versendete Abrechnung immer nachvollziehbar. Sollte sich später doch ein Fehler zeigen, lässt sich die Abrechnung löschen und neu erstellen – siehe <a href="#korrigieren-de">Eine Abrechnung korrigieren oder löschen</a>.</div>
 
   <h2 id="ergebnis-de">Die fertige Abrechnung &amp; PDF-Export</h2>
   <p>Nach dem Finalisieren öffnet sich die Abrechnung im Tab „Abrechnungen“ mit allen Ergebnissen: Zeitraum, Status, Gesamtsumme, die Kosten je Kostenart samt Vermieter-Eigenanteil sowie die Liste aller Mietparteien.</p>
   <p>Für den Versand gibt es zwei Wege:</p>
   <ul>
-    <li><strong>Alle PDFs teilen</strong> – erzeugt in einem Schritt für jede Mietpartei ein eigenes PDF und übergibt alle gemeinsam an das iOS-Teilen-Menü (Mail, Dateien, Drucken, AirDrop …).</li>
+    <li><strong>Alle PDFs teilen</strong> – erzeugt in diesem Moment für jede Mietpartei ein eigenes PDF (mit Fortschrittsanzeige) und übergibt alle gemeinsam an das iOS-Teilen-Menü (Mail, Dateien, Drucken, AirDrop …).</li>
     <li><strong>Als PDF teilen</strong> – im Detail einer einzelnen Mietpartei, wenn Sie nur deren Abrechnung benötigen.</li>
   </ul>
-  <p>Für den Vermieter-Eigenanteil wird bewusst kein PDF erzeugt; er dient nur Ihrer eigenen Übersicht. Der Dateiname folgt dem Muster <code>Nebenkostenabrechnung_&lt;Jahr&gt;_&lt;Mietername&gt;.pdf</code>. Der Inhalt des PDFs bleibt unabhängig von der eingestellten App-Sprache immer auf Deutsch, da es sich um ein rechtlich relevantes Dokument nach deutschem Mietrecht handelt.</p>
+  <p>Für den Vermieter-Eigenanteil wird bewusst kein PDF erzeugt; er dient nur Ihrer eigenen Übersicht. Der Dateiname folgt dem Muster <code>Nebenkostenabrechnung_&lt;Jahr&gt;_&lt;Wohneinheit&gt;_&lt;Mietername&gt;.pdf</code>; gleiche Namen werden durchnummeriert. Die PDF-Dateien werden nur zum Teilen erzeugt und danach wieder gelöscht. Der Inhalt des PDFs bleibt unabhängig von der eingestellten App-Sprache immer auf Deutsch, da es sich um ein rechtlich relevantes Dokument nach deutschem Mietrecht handelt.</p>
   <p>Jedes PDF enthält:</p>
   <ul>
     <li>Absender (Vermieter aus den Stammdaten) und Empfängerblock (Mietername und -adresse, passend für Fensterumschläge)</li>
     <li>Titel und abgerechneten Zeitraum, bei unterjährigem Ein- oder Auszug zusätzlich den abweichenden Nutzungszeitraum</li>
     <li>ein kurzes Anschreiben</li>
-    <li>die Tabelle „Ihre Kosten im Überblick“ mit Gesamtkosten des Hauses, dem Anteil der Mietpartei und der Bezugsgröße je Kostenart (z. B. „12,5 % Wohnfläche“), inklusive Hinweis bei mehrjährigem Turnus</li>
+    <li>die Tabelle „Ihre Kosten im Überblick“ mit Gesamtkosten des Hauses, dem Anteil der Mietpartei und der Bezugsgröße je Kostenart (z. B. „85 m² von 250 m² Wohnfläche“, „12,5 m³ von 148,3 m³ Verbrauch“ oder „730 von 2.555 Personen-Tagen (2 Personen × 365 Tage)“), inklusive Hinweis bei mehrjährigem Turnus. Wurden Belege einer Kostenart unterschiedlich verteilt, stehen die <strong>Teilbeträge</strong> mit ihrer jeweiligen Bezugsgröße darunter. Bei Verteilung nach Wohnungszählern stehen Anfangs- und Endstand des Zählers dabei, mit „geschätzt“, wenn an dem Tag keine Ablesung vorliegt.</li>
     <li>gegebenenfalls den gesondert ausgewiesenen § 35a-Lohnkostenanteil</li>
-    <li>das Abrechnungsergebnis: geleistete Vorauszahlung, Saldo, Nachzahlung oder Guthaben samt Handlungshinweis</li>
+    <li>das Abrechnungsergebnis: geleistete Vorauszahlung, Saldo, Nachzahlung oder Guthaben samt Handlungshinweis mit Zahlungsfrist und – falls hinterlegt – Bankverbindung</li>
     <li>gegebenenfalls den Hinweis auf die neue Vorauszahlung (siehe nächster Abschnitt)</li>
-    <li>eine Fußzeile mit dem Hinweis auf das Recht zur Belegeinsicht</li>
+    <li>eine Fußzeile mit dem Hinweis auf das Recht zur Belegeinsicht und – sofern eingeschaltet – auf die Einwendungsfrist</li>
   </ul>
+  <p>Abrechnungen, die mit einer Version vor 1.2.0 abgeschlossen wurden, behalten ihren damaligen Inhalt: festen Schlusstext („innerhalb von zwei Wochen“), keine Teilbeträge, Zählerstände oder Einwendungshinweis.</p>
 
   <h2 id="vorauszahlung-de">Vorauszahlungen anpassen (§ 560 BGB)</h2>
   <p>Zeigt die Abrechnung deutliche Nachzahlungen, dürfen Sie die monatlichen Vorauszahlungen anpassen. Die fertige Abrechnung bietet dafür den Button <strong>„Vorauszahlungen anpassen?“</strong>.</p>
-  <p>Die App schlägt je Mietpartei einen neuen Betrag vor: die Jahreskosten geteilt durch zwölf, aufgerundet auf volle 5 €. Zum Vergleich sehen Sie den bisherigen Betrag und die Jahreskosten. Bestand ein Mietverhältnis nicht das ganze Jahr, wird der Vorschlag auf ein volles Jahr hochgerechnet und entsprechend gekennzeichnet. Jeden Vorschlag können Sie vor dem Übernehmen noch ändern.</p>
-  <p>Das Feld <strong>„Gültig ab“</strong> ganz oben legt fest, ab wann die neuen Beträge gelten – es gilt gemeinsam für alle Mietparteien dieser Abrechnung.</p>
-  <p>Mit „Sichern“ werden die Beträge dauerhaft in den Vorauszahlungs-Verlauf des jeweiligen Mietverhältnisses geschrieben und stehen damit für künftige Abrechnungen als neues Soll bereit. Die PDFs werden automatisch neu erzeugt und enthalten danach einen zusätzlichen Hinweisblock zur neuen Vorauszahlung. Die Anpassung lässt sich pro Abrechnung nur einmal anwenden; danach blendet die App den Button aus.</p>
+  <p>Die App schlägt je Mietpartei einen neuen Betrag vor: die Jahreskosten geteilt durch zwölf, aufgerundet auf volle 5 €. Zum Vergleich sehen Sie den bisherigen Betrag und die Jahreskosten. Vorschläge gibt es nur für Mietparteien, die am Stichtag noch laufen; wer vorher auszieht, erhält keine neue Vorauszahlung. Bestand ein Mietverhältnis nicht das ganze Jahr, wird der Vorschlag auf ein volles Jahr hochgerechnet und entsprechend gekennzeichnet. Jeden Vorschlag können Sie vor dem Übernehmen noch ändern.</p>
+  <p>Das Feld <strong>„Gültig ab“</strong> ganz oben legt fest, ab wann die neuen Beträge gelten – es gilt gemeinsam für alle Mietparteien dieser Abrechnung. Ein Stichtag in einem bereits abgerechneten Jahr ist nicht möglich.</p>
+  <p>Mit „Sichern“ werden die Beträge dauerhaft in den Vorauszahlungs-Verlauf des jeweiligen Mietverhältnisses geschrieben und stehen damit für künftige Abrechnungen als neues Soll bereit. Die PDFs dieser Abrechnung enthalten danach einen zusätzlichen Hinweisblock mit genau diesem Betrag und Stichtag – auch wenn die Vorauszahlung später erneut angepasst wird. Die Anpassung lässt sich pro Abrechnung nur einmal anwenden; danach blendet die App den Button aus.</p>
 
   <h2 id="korrigieren-de">Eine Abrechnung korrigieren oder löschen</h2>
   <p>Ein <strong>Entwurf</strong> lässt sich jederzeit löschen; dabei gehen nur der Entwurf und die darin vorgenommenen Anpassungen verloren, nicht Ihre Belege oder Zählerstände.</p>
@@ -497,7 +523,8 @@
   <p>Sie können die App-Sprache (Systemsprache, Deutsch, English oder Français) und das Erscheinungsbild (Systemeinstellung, Hell oder Dunkel) unabhängig von den Geräteeinstellungen festlegen. Die Sprache betrifft nur die Oberfläche der App – erzeugte PDFs bleiben immer Deutsch.</p>
 
   <h3>Sicherung</h3>
-  <p>Über <strong>Backup erstellen</strong> exportieren Sie den kompletten Datenbestand aller Objekte – Wohneinheiten, Mietverhältnisse, Kostenarten, Belege, Zählerstände und Abrechnungen sowie die App-Einstellungen – als einzelne Datei, die Sie z. B. in der Dateien-App, per AirDrop oder per E-Mail sichern können. Über <strong>Backup wiederherstellen</strong> spielen Sie eine solche Datei wieder ein. Ein Backup, das mehrere Zähler in einer Wohneinheit oder Zuordnungen aus einem Import enthält, lässt sich erst ab App-Version 1.2.0 wiederherstellen.</p>
+  <p>Über <strong>Backup erstellen</strong> (erst auf Knopfdruck, die Datei wird nach dem Teilen wieder gelöscht) exportieren Sie den kompletten Datenbestand aller Objekte – Wohneinheiten, Mietverhältnisse, Kostenarten, Belege, Zählerstände und Abrechnungen sowie die App-Einstellungen – als einzelne Datei, die Sie z. B. in der Dateien-App, per AirDrop oder per E-Mail sichern können. Über <strong>Backup wiederherstellen</strong> spielen Sie eine solche Datei wieder ein. Ein Backup, das Neuerungen von Version 1.2.0 enthält – mehrere Zähler in einer Wohneinheit, Zuordnungen aus einem Import, Gutschriften, ein abweichendes Abrechnungsjahr, einen Wohnflächen-Verlauf, Zahlungsangaben oder eine mit 1.2.0 abgeschlossene Abrechnung –, lässt sich erst ab App-Version 1.2.0 wiederherstellen.</p>
+  <p>Vor jeder Wiederherstellung sichert die App automatisch den bisherigen Stand. Über <strong>Stand vor der letzten Wiederherstellung teilen</strong> in den Einstellungen können Sie ihn als Datei weitergeben und bei Bedarf wieder einspielen.</p>
   <div class="note"><strong>Achtung:</strong> Die Wiederherstellung ersetzt alle aktuell auf dem Gerät vorhandenen Daten vollständig durch den Inhalt des Backups. Sichern Sie daher den aktuellen Stand, bevor Sie ein älteres Backup einspielen. Da Ihre Daten ausschließlich auf dem Gerät liegen, sind regelmäßige Backups die einzige Absicherung gegen Geräteverlust.</div>
 
   <p><strong>Hinweis:</strong> Nebenkosten bietet keine Steuer- oder Rechtsberatung. Für die inhaltliche und rechtliche Richtigkeit der erstellten Betriebskostenabrechnungen sind Sie als Vermieter selbst verantwortlich.</p>
@@ -507,7 +534,7 @@
   <!-- ============================== ENGLISH ============================== -->
   <section data-lang="en">
   <h1>User Guide</h1>
-  <p class="updated">Last updated: November 9, 2026 · App version 1.2.0</p>
+  <p class="updated">Last updated: November 12, 2026 · App version 1.2.0</p>
 
   <p>This guide walks through the entire app – from creating your first property to the finished PDF of the utility cost statement (German: <em>Betriebskostenabrechnung</em>). Every screen and every input field is explained where it first appears.</p>
 
@@ -569,15 +596,25 @@
   <p>Immediately after creation, the app automatically populates the property with the standard catalog of <a href="#kostenarten-en">cost types</a>.</p>
 
   <h3>Completing the master data</h3>
-  <p>Under <strong>Property → Master data</strong> you can change the details above at any time and add two important fields. Changes are saved immediately here – there is no "Save" button.</p>
+  <p>Under <strong>Property → Master data</strong> you can change the details above at any time and add further fields. Changes are saved immediately here – there is no "Save" button.</p>
   <dl>
     <dt>Currency</dt>
-    <dd>Euro, US Dollar, or British Pound. Only determines which symbol is used to display amounts in the app and in the PDF – stored amounts themselves don't change. If the currency is changed later, already-finalized statements are also displayed with the new symbol.</dd>
+    <dd>Euro, US Dollar, or British Pound. Only determines which symbol is used to display amounts in the app and in the PDF – stored amounts themselves don't change. Statements finalized with version 1.2.0 or later keep the currency set at the time of finalizing; only statements finalized with an older version appear with the new symbol after a change.</dd>
     <dt>Landlord</dt>
     <dd>A multi-line free-text field for the landlord's (or property management's) name and address. This text appears as the sender on every PDF statement – without it, the sender field stays empty.</dd>
     <dt>Number of units</dt>
     <dd>Display only; derived automatically from the units you have created.</dd>
   </dl>
+  <p>In the <strong>Payment</strong> section you define what the PDF says about settling an amount due or a credit:</p>
+  <dl>
+    <dt>Payment term</dt>
+    <dd>1 to 90 days, 14 days by default ("within two weeks"). Applies to paying an amount due and to paying out a credit.</dd>
+    <dt>Account holder and IBAN (optional)</dt>
+    <dd>If an IBAN is entered, the PDF names these bank details for an amount due; otherwise it says "to the rent account known to you" as before. An IBAN with a typo (wrong check digits) is flagged but not rejected.</dd>
+    <dt>Note on objection period</dt>
+    <dd>On by default: the PDF footer points out that objections to the statement must be raised no later than the end of the twelfth month after receipt (§ 556 (3) BGB).</dd>
+  </dl>
+  <div class="note"><strong>Frozen when finalizing:</strong> From version 1.2.0, the landlord, property address, currency, and payment details are copied into a statement when it is finalized. Later changes to the master data only affect future statements – the PDF of a finalized statement always looks as it did when it was sent. Statements finalized with an older version keep their previous content and continue to show the current master data.</div>
 
   <h3>Vacancy &amp; owner-occupancy</h3>
   <p>Under <strong>Property → Vacancy &amp; owner-occupancy</strong> you set the <strong>assumed occupancy</strong> (0 to 20 people): the number of occupants used for a unit without an active tenancy (vacancy or owner use) when applying the "number of occupants" allocation key. Without this value, a vacant apartment would count as 0 occupants, shrinking the allocation denominator in the landlord's favor and making the remaining tenants bear too much. The costs attributable to vacancy are borne by the landlord in the statement.</p>
@@ -588,8 +625,11 @@
     <dt>Name</dt>
     <dd>Required, free-form label, e.g. "2nd floor right" or "Apartment 3".</dd>
     <dt>Living area</dt>
-    <dd>Required, in m² and greater than 0. Used for the "living area" allocation key and, together with the other units, forms the actual basis for allocation.</dd>
+    <dd>Required, in m² and greater than 0. Used for the "living area" allocation key and, together with the other units, forms the actual basis for allocation. It applies "from the start"; if the area changes later, use the living area history.</dd>
   </dl>
+  <h3 id="wohnflaeche-verlauf-en">Living area history</h3>
+  <p>If a unit's living area changes (e.g. after a conversion), enter the new area under <strong>Unit → Living area history</strong> together with the date from which it applies. Each entry applies until the next one. For every day, costs are allocated according to the areas valid on that day. If an area changes within a statement year, the PDF lists the periods separately, e.g. "01.01.–30.06.: 85 m² von 250 m²" and "01.07.–31.12.: 95 m² von 260 m²".</p>
+  <p>Entries dated in an already settled year are not possible, since they would retroactively change a statement that has been sent.</p>
   <div class="note"><strong>Note:</strong> A unit can only be deleted as long as it never had a tenancy, no expense is directly assigned to it, and there are no locked meter readings for it.</div>
 
   <h2 id="mietverhaeltnisse-en">Creating tenancies</h2>
@@ -639,7 +679,7 @@
     <dt>Default allocation key</dt>
     <dd>See the table below. For cost types using "Simple", it can be overridden per expense.</dd>
     <dt>Unit</dt>
-    <dd>Only for the "Consumption-based" method: the consumption unit in which meter readings are recorded (kWh, kW, m³, liter, or piece; or "Not specified").</dd>
+    <dd>For the "Consumption-based" method and the "Unit meter" allocation key: the consumption unit in which meter readings are recorded (kWh, kW, m³, liter, or piece; or "Not specified"). It also appears in the PDF as part of the basis, e.g. "12,5 m³ von 148,3 m³ Verbrauch".</dd>
     <dt>Reference cost type</dt>
     <dd>Only for the "Derived" method, where it is mandatory. Only active, consumption-based cost types can be selected.</dd>
     <dt>Allocatable share of the total (optional)</dt>
@@ -661,6 +701,8 @@
   </table>
   </div>
 
+  <p>If you switch a cost type that has recorded expenses from "Simple" to another method, the app asks first: those expenses will no longer be billed afterwards.</p>
+
   <h3>Allocation key</h3>
   <p>Determines the basis on which the annual cost of this cost type is allocated to the tenants.</p>
   <div class="table-wrap">
@@ -670,7 +712,7 @@
     <tr><td><strong>Number of occupants</strong></td><td>By occupants × occupied days, see the <a href="#mietverhaeltnisse-en">occupant-count history</a>. Vacant units are included using the property's assumed occupancy.</td></tr>
     <tr><td><strong>Number of units</strong></td><td>Evenly across all units × occupied days, regardless of size or occupant count.</td></tr>
     <tr><td><strong>Direct assignment</strong></td><td>The expense is not allocated automatically but assigned to one or more specific units (e.g. a repair affecting only one apartment). Only selectable with the "Simple" method, since only there do individual expenses exist.</td></tr>
-    <tr><td><strong>Unit meter</strong></td><td>Allocation by each apartment's individual consumption according to its <a href="#zaehlerstaende-en">unit meter readings</a>. If a unit has several meters, the sum of their consumption counts. Consumption between two readings is interpolated linearly.</td></tr>
+    <tr><td><strong>Unit meter</strong></td><td>Allocation by each apartment's individual consumption according to its <a href="#zaehlerstaende-en">unit meter readings</a>. If a unit has several meters, the sum of their consumption counts. Consumption between two readings is interpolated linearly. A <strong>derived</strong> cost type (e.g. wastewater) with this key allocates by the unit meters of its reference (e.g. water supply), as long as no unit meter readings of its own are recorded for it.</td></tr>
   </table>
   </div>
 
@@ -810,9 +852,13 @@
     <dt>Cost type</dt>
     <dd>Only active cost types can be selected. If you pick a consumption-based or derived cost type, the amount and shares are locked – those costs come from meter readings and tariff options and cannot be entered manually here.</dd>
     <dt>Date</dt>
-    <dd>Payment date. On a cash basis, it determines which statement year the expense is assigned to.</dd>
+    <dd>Payment date. On a cash basis, it determines which statement year the expense is assigned to – unless you choose a different statement year below. A date in an already settled year is not possible.</dd>
+    <dt>Statement year</dt>
+    <dd>Defaults to "Year of the date". If an invoice belongs to a different year – typically, the invoice for 2025 arrives and is paid in January 2026 – choose the year in which it should be billed. Already settled years are not offered. In the expense list, the expense appears under this year.</dd>
     <dt>Total amount</dt>
-    <dd>The full invoice amount as paid. Required, must be greater than 0.</dd>
+    <dd>The full invoice amount as paid. Required, must be greater than 0 – also for a credit note.</dd>
+    <dt>Credit note</dt>
+    <dd>For refunds, e.g. a repayment from the utility. The amount is entered as a positive value and reduces the costs of this cost type, as well as any labor share entered (§ 35a). In lists it appears with a minus sign and the label "Credit note".</dd>
     <dt>Description</dt>
     <dd>A short note on what the expense actually is, e.g. "Boiler servicing" or "Replacement pump". Helps tell apart several expenses of the same cost type; it appears in the expense list, is searchable, and does not appear on the statement.</dd>
     <dt>Supplier</dt>
@@ -822,13 +868,13 @@
     <dt>Units (for direct assignment)</dt>
     <dd>With direct assignment, the list of all units appears right below – select at least one, otherwise the expense cannot be saved.</dd>
     <dt>Allocatable share of the total (optional)</dt>
-    <dd>How much of the total amount may be charged to tenants – as a percentage (100% by default) or a fixed amount. Useful for invoices that mix chargeable operating costs with non-chargeable maintenance.</dd>
+    <dd>How much of the total amount may be charged to tenants – as a percentage (100% by default) or a fixed amount, at most 100% or the total amount. Useful for invoices that mix chargeable operating costs with non-chargeable maintenance.</dd>
     <dt>Labor cost share of the allocatable amount (§ 35a) (optional)</dt>
-    <dd>The labor share of exactly that allocatable amount, again as a percentage or a fixed amount. It appears separately on the statement so the tenant can claim it on their tax return.</dd>
+    <dd>The labor share of exactly that allocatable amount, again as a percentage or a fixed amount, at most the allocatable amount. It appears separately on the statement so the tenant can claim it on their tax return.</dd>
     <dt>Multi-year cycle</dt>
     <dd>For costs that don't recur annually – after switching it on, set the cycle to between 2 and 10 years. This appears as a note on the PDF but doesn't change the calculation: the expense is still billed in full in the year of payment (cash basis).</dd>
     <dt>Attachment</dt>
-    <dd>Photo or PDF file of the invoice.</dd>
+    <dd>Photo or PDF file of the invoice; on the iPhone also via <strong>Scan document</strong> (the scanned pages are saved as a PDF). New photos and scans are stored downsized (longest edge 2000 pixels) so backups stay small.</dd>
     <dt>Note (optional)</dt>
     <dd>Free text for your own records; likewise does not appear on the statement.</dd>
   </dl>
@@ -842,6 +888,11 @@
 
   <h3>Step 2 – Calculation</h3>
   <p>Here you see all cost types with the total calculated for the year, plus the grand total. For consumption-based and derived cost types you can override the calculated amount manually – for instance when you have the supplier's annual invoice and it differs slightly. Tap the row, enter the amount, and confirm with "Done". An overridden value is marked with an orange pencil and can be returned to the calculated value by swiping and choosing "Reset". For cost types using "Simple" the amount cannot be overridden, since it follows directly from the recorded expenses – correct the expenses instead.</p>
+  <p><strong>Checklist:</strong> Above the cost types, the app collects all obstacles and notes at once. Tapping an entry opens the relevant place (e.g. the tariff options or the meter readings); after returning, the statement is recalculated.</p>
+  <ul>
+    <li><strong>Please fix first</strong> – errors that prevent the calculation, such as missing tariff options or meter readings. If meter readings or tariffs are missing for a consumption-based or derived cost type, you can <strong>Enter amount manually</strong> instead (e.g. the amount of the annual invoice). This is not possible for a cost type whose consumption a derived cost type needs.</li>
+    <li><strong>Notes</strong> – don't prevent the calculation: an extrapolated consumption because a reading at the start or end of the year is missing (a reading on the first or last day of the year is enough), a differing total living area, a missing tenant address, or an empty landlord contact.</li>
+  </ul>
 
   <h3>Step 3 – Review parties</h3>
   <p>You see all tenants for the year with their costs and the resulting balance (amounts due in red, credits in green). If costs fall on vacancy or owner-occupancy, an additional "Landlord's own share" section appears.</p>
@@ -850,39 +901,41 @@
     <li>the actually billed <strong>period</strong> (shorter than the year for a mid-year move-in or move-out),</li>
     <li>the <strong>cost breakdown</strong> per cost type including the underlying basis,</li>
     <li><strong>Expected</strong> – the advance payment owed, calculated from the advance-payment history,</li>
-    <li><strong>Actual (edit)</strong> – the advance payment actually made. It defaults to the expected value; if the actual payment differs (e.g. because one month went unpaid), tap the field and correct it. The amount must not be negative. "Reset to expected" discards the correction,</li>
+    <li><strong>Confirm advance payment</strong> – only advance payments actually made may be deducted. For each tenant, confirm with <strong>Yes, paid in full</strong>, or tap <strong>No, enter amount paid</strong> and enter the annual amount actually paid (not negative). "Reset to expected" or "Withdraw confirmation" undoes this,</li>
     <li>the resulting <strong>balance</strong>.</li>
   </ul>
+  <p>Only when every tenant is confirmed or has an actual amount does "Next" lead to step 4. Tenants without an expected advance payment need no confirmation.</p>
 
   <h3>Step 4 – Finalize</h3>
   <p>Finally you see the costs per cost type plus a summary of "Total tenants" and "Landlord's own share". If the total living area stored in the master data differs from the sum of the units' living areas, an additional dialog warns you – a typical sign that a unit is missing. "Finalize" completes the statement.</p>
-  <div class="note"><strong>What finalizing does:</strong> The result is permanently frozen, and expenses, meter readings, and the tenancy history of this year and all earlier years are locked against changes. This keeps a statement sent to tenants traceable at all times. Should an error surface later, the statement can be deleted and recreated – see <a href="#korrigieren-en">Correcting or deleting a statement</a>.</div>
+  <div class="note"><strong>What finalizing does:</strong> The result is permanently frozen – together with the landlord, property address, currency, and payment details for the PDF. Meter readings and the tenancy history of this year and all earlier years, as well as the expenses of this year, are locked against changes. This keeps a statement sent to tenants traceable at all times. Should an error surface later, the statement can be deleted and recreated – see <a href="#korrigieren-en">Correcting or deleting a statement</a>.</div>
 
   <h2 id="ergebnis-en">The finished statement &amp; PDF export</h2>
   <p>After finalizing, the statement opens in the "Statements" tab with all results: period, status, total, the costs per cost type including the landlord's own share, and the list of all tenants.</p>
   <p>There are two ways to send it out:</p>
   <ul>
-    <li><strong>Share all PDFs</strong> – generates a separate PDF for every tenant in one step and hands them all to the iOS share sheet (Mail, Files, Print, AirDrop …).</li>
+    <li><strong>Share all PDFs</strong> – generates a separate PDF for every tenant at that moment (with a progress indicator) and hands them all to the iOS share sheet (Mail, Files, Print, AirDrop …).</li>
     <li><strong>Share as PDF</strong> – within an individual tenant's detail view, when you only need that one statement.</li>
   </ul>
-  <p>No PDF is generated for the landlord's own share; it exists only for your own overview. The file name follows the pattern <code>Nebenkostenabrechnung_&lt;year&gt;_&lt;tenant name&gt;.pdf</code>. The PDF's content always stays in German regardless of the configured app language, since it is a legally relevant document under German tenancy law.</p>
+  <p>No PDF is generated for the landlord's own share; it exists only for your own overview. The file name follows the pattern <code>Nebenkostenabrechnung_&lt;year&gt;_&lt;unit&gt;_&lt;tenant name&gt;.pdf</code>; identical names are numbered. The PDF files are only created for sharing and are deleted again afterwards. The PDF's content always stays in German regardless of the configured app language, since it is a legally relevant document under German tenancy law.</p>
   <p>Every PDF contains:</p>
   <ul>
     <li>Sender (landlord from the master data) and recipient block (tenant name and address, suitable for windowed envelopes)</li>
     <li>Title and billed period, plus the differing period of use in case of a mid-year move-in or move-out</li>
     <li>A short covering note</li>
-    <li>The table "Your costs at a glance" with the building's total cost, the tenant's share, and the basis per cost type (e.g. "12.5% living area"), including a note for multi-year cycles</li>
+    <li>The table "Your costs at a glance" with the building's total cost, the tenant's share, and the basis per cost type (e.g. "85 m² von 250 m² Wohnfläche", "12,5 m³ von 148,3 m³ Verbrauch", or "730 von 2.555 Personen-Tagen (2 Personen × 365 Tage)"), including a note for multi-year cycles. If expenses of a cost type were allocated differently, the <strong>partial amounts</strong> with their respective basis are listed below. With allocation by unit meters, the meter's start and end readings are shown, marked "geschätzt" (estimated) if there is no reading on that day.</li>
     <li>The separately listed § 35a labor-cost share, where applicable</li>
-    <li>The statement result: advance payments made, balance, amount due or credit, plus what to do next</li>
+    <li>The statement result: advance payments made, balance, amount due or credit, plus what to do next with the payment term and – if entered – the bank details</li>
     <li>A note about the new advance payment, where applicable (see next section)</li>
-    <li>A footer noting the right to inspect the underlying receipts</li>
+    <li>A footer noting the right to inspect the underlying receipts and – if switched on – the objection period</li>
   </ul>
+  <p>Statements finalized with a version before 1.2.0 keep their original content: the fixed closing text ("innerhalb von zwei Wochen"), no partial amounts, meter readings, or objection note.</p>
 
   <h2 id="vorauszahlung-en">Adjusting advance payments (§ 560 BGB)</h2>
   <p>If the statement shows substantial amounts due, you may adjust the monthly advance payments. The finished statement offers the button <strong>"Adjust advance payments?"</strong> for this.</p>
-  <p>The app suggests a new amount per tenant: the annual cost divided by twelve, rounded up to the nearest 5 €. For comparison, you see the previous amount and the annual cost. If a tenancy did not span the whole year, the suggestion is extrapolated to a full year and labeled accordingly. You can still edit each suggestion before applying it.</p>
-  <p>The <strong>"Valid from"</strong> field at the top determines when the new amounts take effect – it applies jointly to all tenants of this statement.</p>
-  <p>"Save" writes the amounts permanently into each tenancy's advance-payment history, making them the new expected value for future statements. The PDFs are regenerated automatically and then include an additional note about the new advance payment. The adjustment can only be applied once per statement; afterwards the app hides the button.</p>
+  <p>The app suggests a new amount per tenant: the annual cost divided by twelve, rounded up to the nearest 5 €. For comparison, you see the previous amount and the annual cost. Suggestions are only made for tenancies still running on the effective date; tenants moving out before then get no new advance payment. If a tenancy did not span the whole year, the suggestion is extrapolated to a full year and labeled accordingly. You can still edit each suggestion before applying it.</p>
+  <p>The <strong>"Valid from"</strong> field at the top determines when the new amounts take effect – it applies jointly to all tenants of this statement. An effective date in an already settled year is not possible.</p>
+  <p>"Save" writes the amounts permanently into each tenancy's advance-payment history, making them the new expected value for future statements. From then on, the PDFs of this statement include an additional note with exactly this amount and effective date – even if the advance payment is adjusted again later. The adjustment can only be applied once per statement; afterwards the app hides the button.</p>
 
   <h2 id="korrigieren-en">Correcting or deleting a statement</h2>
   <p>A <strong>draft</strong> can be deleted at any time; only the draft and the adjustments made within it are lost, not your expenses or meter readings.</p>
@@ -896,7 +949,8 @@
   <p>You can set the app language (system language, Deutsch, English, or Français) and appearance (system setting, light, or dark) independently of your device settings. The language only affects the app's interface – generated PDFs always stay in German.</p>
 
   <h3>Backup</h3>
-  <p><strong>Create backup</strong> exports the complete dataset of all properties – units, tenancies, cost types, expenses, meter readings, and statements, as well as the app settings – as a single file that you can store via the Files app, AirDrop, or email. <strong>Restore backup</strong> imports such a file again. A backup that contains several meters in one unit or assignments from an import can only be restored with app version 1.2.0 or later.</p>
+  <p><strong>Create backup</strong> (only when tapped; the file is deleted again after sharing) exports the complete dataset of all properties – units, tenancies, cost types, expenses, meter readings, and statements, as well as the app settings – as a single file that you can store via the Files app, AirDrop, or email. <strong>Restore backup</strong> imports such a file again. A backup containing features of version 1.2.0 – several meters in one unit, assignments from an import, credit notes, a different statement year, a living area history, payment details, or a statement finalized with 1.2.0 – can only be restored with app version 1.2.0 or later.</p>
+  <p>Before every restore, the app automatically saves the previous data. With <strong>Share data from before the last restore</strong> in the settings, you can pass it on as a file and import it again if needed.</p>
   <div class="note"><strong>Warning:</strong> Restoring completely replaces all data currently on the device with the backup's contents. Back up the current state before importing an older backup. Since your data lives solely on the device, regular backups are the only protection against losing it.</div>
 
   <p><strong>Note:</strong> Nebenkosten does not provide tax or legal advice. As the landlord, you are solely responsible for the factual and legal accuracy of the utility cost statements you create.</p>
@@ -906,7 +960,7 @@
   <!-- ============================== FRANÇAIS ============================== -->
   <section data-lang="fr">
   <h1>Guide d'utilisation</h1>
-  <p class="updated">Dernière mise à jour : 9 novembre 2026 · Version de l'application 1.2.0</p>
+  <p class="updated">Dernière mise à jour : 12 novembre 2026 · Version de l'application 1.2.0</p>
 
   <p>Ce guide vous accompagne à travers l'intégralité de l'application – de la création de votre premier bien jusqu'au PDF final du décompte de charges (en allemand : <em>Betriebskostenabrechnung</em>). Chaque écran et chaque champ de saisie est expliqué à l'endroit où il apparaît pour la première fois.</p>
 
@@ -968,15 +1022,25 @@
   <p>Juste après la création, l'application remplit automatiquement le bien avec le catalogue standard des <a href="#kostenarten-fr">types de charges</a>.</p>
 
   <h3>Compléter les données de base</h3>
-  <p>Sous <strong>Bien → Données de base</strong>, vous pouvez modifier à tout moment les indications ci-dessus et compléter deux champs importants. Les modifications y sont enregistrées immédiatement – il n'y a pas de bouton « Enregistrer ».</p>
+  <p>Sous <strong>Bien → Données de base</strong>, vous pouvez modifier à tout moment les indications ci-dessus et compléter d'autres champs. Les modifications y sont enregistrées immédiatement – il n'y a pas de bouton « Enregistrer ».</p>
   <dl>
     <dt>Devise</dt>
-    <dd>Euro, dollar américain ou livre sterling. Détermine uniquement le symbole utilisé pour afficher les montants dans l'application et dans le PDF – les montants enregistrés eux-mêmes ne changent pas. Si la devise est modifiée ultérieurement, les décomptes déjà finalisés sont également affichés avec le nouveau symbole.</dd>
+    <dd>Euro, dollar américain ou livre sterling. Détermine uniquement le symbole utilisé pour afficher les montants dans l'application et dans le PDF – les montants enregistrés eux-mêmes ne changent pas. Les décomptes finalisés à partir de la version 1.2.0 conservent la devise réglée au moment de la finalisation ; seuls les décomptes finalisés avec une version antérieure apparaissent avec le nouveau symbole après une modification.</dd>
     <dt>Bailleur</dt>
     <dd>Champ de texte libre sur plusieurs lignes pour le nom et l'adresse du bailleur (ou de la gérance). Ce texte apparaît comme expéditeur sur chaque décompte PDF – sans lui, le champ expéditeur reste vide.</dd>
     <dt>Nombre de logements</dt>
     <dd>Affiché uniquement ; découle automatiquement des logements créés.</dd>
   </dl>
+  <p>Dans la section <strong>Paiement</strong>, vous définissez ce que le PDF indique pour le règlement d'un solde à payer ou d'un solde créditeur :</p>
+  <dl>
+    <dt>Délai de paiement</dt>
+    <dd>De 1 à 90 jours, 14 jours par défaut (« dans un délai de deux semaines »). S'applique au virement d'un solde à payer et au versement d'un solde créditeur.</dd>
+    <dt>Titulaire du compte et IBAN (facultatif)</dt>
+    <dd>Si un IBAN est saisi, le PDF indique ces coordonnées bancaires pour un solde à payer ; sinon, il mentionne comme auparavant « le compte de loyer que vous connaissez ». Un IBAN comportant une faute de frappe (clé de contrôle erronée) est signalé, mais pas refusé.</dd>
+    <dt>Mention du délai de contestation</dt>
+    <dd>Activée par défaut : le pied de page du PDF rappelle que les contestations du décompte doivent être communiquées au plus tard à la fin du douzième mois suivant sa réception (§ 556 al. 3 BGB).</dd>
+  </dl>
+  <div class="note"><strong>Figé lors de la finalisation :</strong> à partir de la version 1.2.0, le bailleur, l'adresse du bien, la devise et les informations de paiement sont repris dans le décompte au moment de sa finalisation. Les modifications ultérieures des données de base ne concernent que les décomptes futurs – le PDF d'un décompte finalisé reste toujours tel qu'il a été envoyé. Les décomptes finalisés avec une version antérieure conservent leur contenu précédent et continuent d'afficher les données de base actuelles.</div>
 
   <h3>Vacance et usage propre</h3>
   <p>Sous <strong>Bien → Vacance et usage propre</strong>, vous définissez l'<strong>occupation fictive</strong> (de 0 à 20 personnes) : le nombre d'occupants pris en compte pour un logement sans bail actif (vacance ou usage personnel) dans le cadre de la clé de répartition « nombre d'occupants ». Sans cette valeur, un logement vacant compterait 0 occupant, ce qui réduirait le dénominateur de répartition au profit du bailleur et ferait supporter une part trop élevée aux autres locataires. Les charges imputables à la vacance sont supportées par le bailleur dans le décompte.</p>
@@ -987,8 +1051,11 @@
     <dt>Nom</dt>
     <dd>Champ obligatoire, désignation libre, par ex. « 2e étage droite » ou « Logement 3 ».</dd>
     <dt>Surface habitable</dt>
-    <dd>Champ obligatoire, en m² et supérieur à 0. Utilisée pour la clé de répartition « surface habitable » et constitue, avec les autres logements, la base réelle de répartition.</dd>
+    <dd>Champ obligatoire, en m² et supérieur à 0. Utilisée pour la clé de répartition « surface habitable » et constitue, avec les autres logements, la base réelle de répartition. Elle vaut « depuis le début » ; si la surface change par la suite, utilisez l'historique de la surface habitable.</dd>
   </dl>
+  <h3 id="wohnflaeche-verlauf-fr">Historique de la surface habitable</h3>
+  <p>Si la surface habitable d'un logement change (par ex. après un aménagement), saisissez la nouvelle surface sous <strong>Logement → Historique de la surface habitable</strong>, avec la date à partir de laquelle elle s'applique. Chaque entrée vaut jusqu'à la suivante. Pour chaque jour, les charges sont réparties selon les surfaces valables ce jour-là. Si une surface change au cours d'une année de décompte, le PDF présente les périodes séparément, par ex. « 01.01.–30.06.: 85 m² von 250 m² » et « 01.07.–31.12.: 95 m² von 260 m² ».</p>
+  <p>Les entrées datées d'une année déjà décomptée ne sont pas possibles, car elles modifieraient rétroactivement un décompte déjà envoyé.</p>
   <div class="note"><strong>Remarque :</strong> un logement ne peut être supprimé que si aucun bail n'y a jamais été rattaché, qu'aucune dépense ne lui est directement attribuée et qu'aucun relevé de compteur verrouillé ne le concerne.</div>
 
   <h2 id="mietverhaeltnisse-fr">Créer des baux</h2>
@@ -1038,7 +1105,7 @@
     <dt>Clé de répartition par défaut</dt>
     <dd>Voir le tableau ci-dessous. Pour les types de charges « Simple », elle peut être remplacée pour chaque dépense.</dd>
     <dt>Unité</dt>
-    <dd>Uniquement pour la méthode « Basé sur la consommation » : l'unité de consommation dans laquelle les relevés sont saisis (kWh, kW, m³, litre ou pièce ; ou « Non spécifié »).</dd>
+    <dd>Pour la méthode « Basé sur la consommation » et la clé de répartition « Compteur de logement » : l'unité de consommation dans laquelle les relevés sont saisis (kWh, kW, m³, litre ou pièce ; ou « Non spécifié »). Elle apparaît aussi dans le PDF avec la base de calcul, par ex. « 12,5 m³ von 148,3 m³ Verbrauch ».</dd>
     <dt>Type de charge de référence</dt>
     <dd>Uniquement pour la méthode « Dérivé », où il est obligatoire. Seuls les types de charges actifs et basés sur la consommation peuvent être sélectionnés.</dd>
     <dt>Part imputable du coût total (optionnel)</dt>
@@ -1060,6 +1127,8 @@
   </table>
   </div>
 
+  <p>Si vous passez un type de charge comportant des dépenses saisies de « Simple » à une autre méthode, l'application vous demande confirmation : ces dépenses ne seront alors plus décomptées.</p>
+
   <h3>Clé de répartition</h3>
   <p>Détermine selon quel critère le coût annuel de ce type de charge est réparti entre les locataires.</p>
   <div class="table-wrap">
@@ -1069,7 +1138,7 @@
     <tr><td><strong>Nombre d'occupants</strong></td><td>Selon le nombre d'occupants × les jours d'occupation, voir l'<a href="#mietverhaeltnisse-fr">historique du nombre d'occupants</a>. Les logements vacants sont pris en compte avec l'occupation fictive du bien.</td></tr>
     <tr><td><strong>Nombre de logements</strong></td><td>Répartition égale entre tous les logements × jours d'occupation, indépendamment de la taille ou du nombre d'occupants.</td></tr>
     <tr><td><strong>Attribution directe</strong></td><td>La dépense n'est pas répartie automatiquement, mais attribuée à un ou plusieurs logements précis (par ex. une réparation ne concernant qu'un seul logement). Sélectionnable uniquement avec la méthode « Simple », car les dépenses individuelles n'existent que là.</td></tr>
-    <tr><td><strong>Compteur de logement</strong></td><td>Répartition selon la consommation individuelle de chaque logement, d'après ses <a href="#zaehlerstaende-fr">relevés de compteur</a>. Si un logement possède plusieurs compteurs, c'est la somme de leurs consommations qui compte. La consommation entre deux relevés est interpolée linéairement.</td></tr>
+    <tr><td><strong>Compteur de logement</strong></td><td>Répartition selon la consommation individuelle de chaque logement, d'après ses <a href="#zaehlerstaende-fr">relevés de compteur</a>. Si un logement possède plusieurs compteurs, c'est la somme de leurs consommations qui compte. La consommation entre deux relevés est interpolée linéairement. Un type de charge <strong>dérivé</strong> (par ex. évacuation des eaux usées) avec cette clé répartit selon les compteurs de logement de sa référence (par ex. approvisionnement en eau), tant qu'aucun relevé de compteur de logement propre n'est saisi pour lui.</td></tr>
   </table>
   </div>
 
@@ -1209,9 +1278,13 @@
     <dt>Type de charge</dt>
     <dd>Seuls les types de charges actifs sont proposés. Si vous choisissez un type basé sur la consommation ou dérivé, le montant et les parts sont verrouillés – ces coûts proviennent des relevés de compteur et des options tarifaires et ne peuvent pas être saisis manuellement ici.</dd>
     <dt>Date</dt>
-    <dd>Date de paiement. Selon le principe de l'encaissement/décaissement, elle détermine à quelle année de décompte la dépense est rattachée.</dd>
+    <dd>Date de paiement. Selon le principe de l'encaissement/décaissement, elle détermine à quelle année de décompte la dépense est rattachée – sauf si vous choisissez une autre année de décompte ci-dessous. Une date dans une année déjà décomptée n'est pas possible.</dd>
+    <dt>Année de décompte</dt>
+    <dd>« Année de la date » par défaut. Si une facture concerne une autre année – cas typique : la facture pour 2025 arrive et est payée en janvier 2026 –, choisissez l'année dans laquelle elle doit être décomptée. Les années déjà décomptées ne sont pas proposées. Dans la liste des dépenses, la dépense apparaît sous cette année.</dd>
     <dt>Montant total</dt>
-    <dd>Le montant total de la facture, tel qu'il a été payé. Champ obligatoire, doit être supérieur à 0.</dd>
+    <dd>Le montant total de la facture, tel qu'il a été payé. Champ obligatoire, doit être supérieur à 0 – y compris pour un avoir.</dd>
+    <dt>Avoir</dt>
+    <dd>Pour les remboursements, par ex. un trop-perçu restitué par le fournisseur. Le montant est saisi en positif et réduit les charges de ce type, ainsi qu'une éventuelle part de main-d'œuvre (§ 35a). Dans les listes, il apparaît avec un signe moins et la mention « Avoir ».</dd>
     <dt>Description</dt>
     <dd>Courte indication de ce qu'est concrètement la dépense, par ex. « Entretien de la chaudière » ou « Pompe de remplacement ». Aide à distinguer plusieurs dépenses d'un même type de charge ; apparaît dans la liste des dépenses, peut être recherchée et n'apparaît pas sur le décompte.</dd>
     <dt>Fournisseur</dt>
@@ -1221,13 +1294,13 @@
     <dt>Logements (en cas d'attribution directe)</dt>
     <dd>En cas d'attribution directe, la liste de tous les logements apparaît juste en dessous – sélectionnez-en au moins un, sinon la dépense ne peut pas être enregistrée.</dd>
     <dt>Part imputable du coût total (optionnel)</dt>
-    <dd>Quelle part du montant total peut être imputée aux locataires – en pourcentage (100 % par défaut) ou en montant fixe. Utile pour les factures mêlant charges récupérables et travaux d'entretien non récupérables.</dd>
+    <dd>Quelle part du montant total peut être imputée aux locataires – en pourcentage (100 % par défaut) ou en montant fixe, au plus 100 % ou le montant total. Utile pour les factures mêlant charges récupérables et travaux d'entretien non récupérables.</dd>
     <dt>Part des frais de main-d'œuvre dans le montant imputable (§ 35a) (optionnel)</dt>
-    <dd>La part de main-d'œuvre de ce montant imputable précisément, également en pourcentage ou en montant fixe. Elle apparaît séparément sur le décompte afin que le locataire puisse la faire valoir fiscalement.</dd>
+    <dd>La part de main-d'œuvre de ce montant imputable précisément, également en pourcentage ou en montant fixe, au plus le montant imputable. Elle apparaît séparément sur le décompte afin que le locataire puisse la faire valoir fiscalement.</dd>
     <dt>Cycle pluriannuel</dt>
     <dd>Pour les charges qui ne reviennent pas chaque année – après activation, réglez le cycle entre 2 et 10 ans. Cela apparaît comme une remarque sur le PDF mais ne change rien au calcul : la dépense reste décomptée intégralement dans l'année de paiement.</dd>
     <dt>Pièce jointe</dt>
-    <dd>Photo ou fichier PDF de la facture.</dd>
+    <dd>Photo ou fichier PDF de la facture ; sur l'iPhone également via <strong>Numériser un document</strong> (les pages numérisées sont enregistrées en PDF). Les nouvelles photos et numérisations sont enregistrées en taille réduite (2000 pixels sur le plus grand côté) afin que les sauvegardes restent légères.</dd>
     <dt>Remarque (facultatif)</dt>
     <dd>Texte libre pour votre documentation ; n'apparaît pas non plus sur le décompte.</dd>
   </dl>
@@ -1241,6 +1314,11 @@
 
   <h3>Étape 2 – Calcul</h3>
   <p>Vous voyez ici tous les types de charges avec le montant total calculé pour l'année, ainsi que le total général. Pour les types basés sur la consommation et dérivés, vous pouvez remplacer manuellement le montant calculé – par exemple si vous disposez de la facture annuelle du fournisseur et qu'elle diffère légèrement. Touchez la ligne, saisissez le montant et confirmez avec « Terminé ». Une valeur remplacée est signalée par un crayon orange et peut être ramenée à la valeur calculée par un balayage suivi de « Réinitialiser ». Pour les types de charges « Simple », le montant ne peut pas être remplacé, puisqu'il découle directement des dépenses saisies – corrigez plutôt les dépenses.</p>
+  <p><strong>Liste de contrôle :</strong> au-dessus des types de charges, l'application rassemble en une fois tous les obstacles et remarques. Toucher une entrée ouvre l'endroit concerné (par ex. les options tarifaires ou les relevés) ; au retour, le décompte est recalculé.</p>
+  <ul>
+    <li><strong>À corriger d'abord</strong> – les erreurs qui empêchent le calcul, comme des options tarifaires ou des relevés manquants. S'il manque des relevés ou des tarifs pour un type basé sur la consommation ou dérivé, vous pouvez à la place <strong>Saisir le montant manuellement</strong> (par ex. le montant de la facture annuelle). Ce n'est pas possible pour un type de charge dont la consommation est nécessaire à un type dérivé.</li>
+    <li><strong>Remarques</strong> – n'empêchent pas le calcul : une consommation extrapolée faute de relevé en début ou en fin d'année (un relevé le premier ou le dernier jour de l'année suffit), une surface habitable totale différente, une adresse de locataire manquante ou un contact du bailleur vide.</li>
+  </ul>
 
   <h3>Étape 3 – Vérifier les parties</h3>
   <p>Vous voyez tous les locataires de l'année avec leurs charges et le solde qui en résulte (solde à payer en rouge, solde créditeur en vert). Si des charges sont imputables à la vacance ou à l'usage propre, une section « Part propre du bailleur » apparaît en plus.</p>
@@ -1249,39 +1327,41 @@
     <li>la <strong>période</strong> réellement facturée (plus courte que l'année en cas d'emménagement ou de départ en cours d'année),</li>
     <li>le <strong>détail des charges</strong> par type, avec la base de calcul,</li>
     <li><strong>Prévu</strong> – la provision due, calculée à partir de l'historique des provisions,</li>
-    <li><strong>Réel (modifier)</strong> – la provision réellement versée. La valeur prévue est proposée par défaut ; si le paiement réel diffère (par ex. un mois impayé), touchez le champ et corrigez-le. Le montant ne doit pas être négatif. « Réinitialiser au montant prévu » annule la correction,</li>
+    <li><strong>Confirmer la provision</strong> – seules les provisions réellement versées peuvent être déduites. Confirmez donc pour chaque locataire avec <strong>Oui, entièrement payé</strong>, ou touchez <strong>Non, saisir le montant payé</strong> et indiquez le montant annuel réellement versé (non négatif). « Réinitialiser au montant prévu » ou « Retirer la confirmation » annule l'opération,</li>
     <li>le <strong>solde</strong> obtenu.</li>
   </ul>
+  <p>« Suivant » ne mène à l'étape 4 que lorsque chaque locataire est confirmé ou dispose d'un montant réel. Les locataires sans provision prévue n'ont pas besoin de confirmation.</p>
 
   <h3>Étape 4 – Finaliser</h3>
   <p>Pour terminer, vous voyez les charges par type ainsi qu'un résumé avec « Total locataires » et « Part propre du bailleur ». Si la surface habitable totale enregistrée dans les données de base diffère de la somme des surfaces des logements, une boîte de dialogue supplémentaire vous avertit – signe typique qu'un logement manque. « Finaliser » clôture le décompte.</p>
-  <div class="note"><strong>Ce que fait la finalisation :</strong> le résultat est figé de façon permanente, et les dépenses, relevés de compteur et l'historique des baux de cette année et de toutes les années antérieures sont verrouillés. Un décompte envoyé aux locataires reste ainsi toujours vérifiable. Si une erreur apparaît malgré tout plus tard, le décompte peut être supprimé et recréé – voir <a href="#korrigieren-fr">Corriger ou supprimer un décompte</a>.</div>
+  <div class="note"><strong>Ce que fait la finalisation :</strong> le résultat est figé de façon permanente – avec le bailleur, l'adresse du bien, la devise et les informations de paiement pour le PDF. Les relevés de compteur et l'historique des baux de cette année et de toutes les années antérieures, ainsi que les dépenses de cette année, sont verrouillés. Un décompte envoyé aux locataires reste ainsi toujours vérifiable. Si une erreur apparaît malgré tout plus tard, le décompte peut être supprimé et recréé – voir <a href="#korrigieren-fr">Corriger ou supprimer un décompte</a>.</div>
 
   <h2 id="ergebnis-fr">Le décompte finalisé et l'export PDF</h2>
   <p>Après la finalisation, le décompte s'ouvre dans l'onglet « Décomptes » avec tous les résultats : période, statut, total, charges par type y compris la part propre du bailleur, et la liste de tous les locataires.</p>
   <p>Deux voies existent pour l'envoi :</p>
   <ul>
-    <li><strong>Partager tous les PDF</strong> – génère en une étape un PDF distinct pour chaque locataire et les transmet tous ensemble au menu de partage iOS (Mail, Fichiers, impression, AirDrop…).</li>
+    <li><strong>Partager tous les PDF</strong> – génère à ce moment un PDF distinct pour chaque locataire (avec indication de progression) et les transmet tous ensemble au menu de partage iOS (Mail, Fichiers, impression, AirDrop…).</li>
     <li><strong>Partager en PDF</strong> – dans le détail d'un locataire précis, si vous n'avez besoin que de son décompte.</li>
   </ul>
-  <p>Aucun PDF n'est généré pour la part propre du bailleur ; elle n'existe que pour votre propre vue d'ensemble. Le nom du fichier suit le modèle <code>Nebenkostenabrechnung_&lt;année&gt;_&lt;nom du locataire&gt;.pdf</code>. Le contenu du PDF reste toujours en allemand, indépendamment de la langue configurée, car il s'agit d'un document juridiquement pertinent en droit locatif allemand.</p>
+  <p>Aucun PDF n'est généré pour la part propre du bailleur ; elle n'existe que pour votre propre vue d'ensemble. Le nom du fichier suit le modèle <code>Nebenkostenabrechnung_&lt;année&gt;_&lt;logement&gt;_&lt;nom du locataire&gt;.pdf</code> ; les noms identiques sont numérotés. Les fichiers PDF ne sont créés que pour le partage et sont ensuite supprimés. Le contenu du PDF reste toujours en allemand, indépendamment de la langue configurée, car il s'agit d'un document juridiquement pertinent en droit locatif allemand.</p>
   <p>Chaque PDF contient :</p>
   <ul>
     <li>L'expéditeur (bailleur issu des données de base) et le bloc destinataire (nom et adresse du locataire, adapté aux enveloppes à fenêtre)</li>
     <li>Le titre et la période facturée, ainsi que la période d'occupation différente en cas d'emménagement ou de départ en cours d'année</li>
     <li>Une brève lettre d'accompagnement</li>
-    <li>Le tableau « Vos charges en un coup d'œil » avec le coût total de l'immeuble, la part du locataire et la base de calcul par type de charge (par ex. « 12,5 % surface habitable »), y compris une remarque en cas de cycle pluriannuel</li>
+    <li>Le tableau « Vos charges en un coup d'œil » avec le coût total de l'immeuble, la part du locataire et la base de calcul par type de charge (par ex. « 85 m² von 250 m² Wohnfläche », « 12,5 m³ von 148,3 m³ Verbrauch » ou « 730 von 2.555 Personen-Tagen (2 Personen × 365 Tage) »), y compris une remarque en cas de cycle pluriannuel. Si les dépenses d'un type de charge ont été réparties différemment, les <strong>montants partiels</strong> figurent en dessous avec leur base respective. En cas de répartition selon les compteurs de logement, les index de début et de fin du compteur sont indiqués, avec la mention « geschätzt » (estimé) s'il n'existe pas de relevé ce jour-là.</li>
     <li>Le cas échéant, la part de main-d'œuvre § 35a indiquée séparément</li>
-    <li>Le résultat du décompte : provisions versées, solde, montant à payer ou solde créditeur, avec la marche à suivre</li>
+    <li>Le résultat du décompte : provisions versées, solde, montant à payer ou solde créditeur, avec la marche à suivre, le délai de paiement et – s'il est renseigné – les coordonnées bancaires</li>
     <li>Le cas échéant, la remarque concernant la nouvelle provision (voir section suivante)</li>
-    <li>Un pied de page rappelant le droit de consulter les justificatifs</li>
+    <li>Un pied de page rappelant le droit de consulter les justificatifs et – si elle est activée – le délai de contestation</li>
   </ul>
+  <p>Les décomptes finalisés avec une version antérieure à 1.2.0 conservent leur contenu d'origine : texte de clôture fixe (« innerhalb von zwei Wochen »), sans montants partiels, index de compteur ni mention du délai de contestation.</p>
 
   <h2 id="vorauszahlung-fr">Ajuster les provisions (§ 560 BGB)</h2>
   <p>Si le décompte fait apparaître des soldes à payer importants, vous pouvez ajuster les provisions mensuelles. Le décompte finalisé propose pour cela le bouton <strong>« Ajuster les provisions ? »</strong>.</p>
-  <p>L'application propose un nouveau montant par locataire : les coûts annuels divisés par douze, arrondis au multiple de 5 € supérieur. À titre de comparaison, vous voyez le montant précédent et les coûts annuels. Si un bail n'a pas couvert toute l'année, la proposition est extrapolée sur une année complète et signalée comme telle. Vous pouvez encore modifier chaque proposition avant de l'appliquer.</p>
-  <p>Le champ <strong>« Valable à partir de »</strong> tout en haut détermine la date de prise d'effet des nouveaux montants – il vaut conjointement pour tous les locataires de ce décompte.</p>
-  <p>« Enregistrer » inscrit les montants de façon permanente dans l'historique des provisions de chaque bail, où ils deviennent le nouveau montant prévu pour les décomptes futurs. Les PDF sont régénérés automatiquement et comportent ensuite un bloc supplémentaire sur la nouvelle provision. L'ajustement ne peut être appliqué qu'une seule fois par décompte ; ensuite, l'application masque le bouton.</p>
+  <p>L'application propose un nouveau montant par locataire : les coûts annuels divisés par douze, arrondis au multiple de 5 € supérieur. À titre de comparaison, vous voyez le montant précédent et les coûts annuels. Des propositions ne sont faites que pour les baux encore en cours à la date d'effet ; un locataire qui part avant ne reçoit pas de nouvelle provision. Si un bail n'a pas couvert toute l'année, la proposition est extrapolée sur une année complète et signalée comme telle. Vous pouvez encore modifier chaque proposition avant de l'appliquer.</p>
+  <p>Le champ <strong>« Valable à partir de »</strong> tout en haut détermine la date de prise d'effet des nouveaux montants – il vaut conjointement pour tous les locataires de ce décompte. Une date d'effet dans une année déjà décomptée n'est pas possible.</p>
+  <p>« Enregistrer » inscrit les montants de façon permanente dans l'historique des provisions de chaque bail, où ils deviennent le nouveau montant prévu pour les décomptes futurs. Les PDF de ce décompte comportent ensuite un bloc supplémentaire indiquant exactement ce montant et cette date d'effet – même si la provision est de nouveau ajustée plus tard. L'ajustement ne peut être appliqué qu'une seule fois par décompte ; ensuite, l'application masque le bouton.</p>
 
   <h2 id="korrigieren-fr">Corriger ou supprimer un décompte</h2>
   <p>Un <strong>brouillon</strong> peut être supprimé à tout moment ; seuls le brouillon et les ajustements qui y ont été faits sont perdus, pas vos dépenses ni vos relevés de compteur.</p>
@@ -1295,7 +1375,8 @@
   <p>Vous pouvez définir la langue de l'application (langue du système, Deutsch, English ou Français) et l'apparence (réglage système, clair ou sombre) indépendamment des réglages de l'appareil. La langue ne concerne que l'interface – les PDF générés restent toujours en allemand.</p>
 
   <h3>Sauvegarde</h3>
-  <p><strong>Créer une sauvegarde</strong> exporte l'ensemble des données de tous les biens – logements, baux, types de charges, dépenses, relevés de compteur et décomptes, ainsi que les réglages de l'application – dans un fichier unique que vous pouvez conserver via l'app Fichiers, AirDrop ou par e-mail. <strong>Restaurer une sauvegarde</strong> réimporte un tel fichier. Une sauvegarde contenant plusieurs compteurs dans un logement ou des attributions issues d'une importation ne peut être restaurée qu'avec la version 1.2.0 ou ultérieure de l'application.</p>
+  <p><strong>Créer une sauvegarde</strong> (uniquement sur demande ; le fichier est supprimé après le partage) exporte l'ensemble des données de tous les biens – logements, baux, types de charges, dépenses, relevés de compteur et décomptes, ainsi que les réglages de l'application – dans un fichier unique que vous pouvez conserver via l'app Fichiers, AirDrop ou par e-mail. <strong>Restaurer une sauvegarde</strong> réimporte un tel fichier. Une sauvegarde contenant des nouveautés de la version 1.2.0 – plusieurs compteurs dans un logement, des attributions issues d'une importation, des avoirs, une autre année de décompte, un historique de la surface habitable, des informations de paiement ou un décompte finalisé avec la version 1.2.0 – ne peut être restaurée qu'avec la version 1.2.0 ou ultérieure de l'application.</p>
+  <p>Avant chaque restauration, l'application enregistre automatiquement l'état précédent. Avec <strong>Partager l'état avant la dernière restauration</strong> dans les réglages, vous pouvez le transmettre sous forme de fichier et le réimporter si nécessaire.</p>
   <div class="note"><strong>Attention :</strong> la restauration remplace intégralement toutes les données présentes sur l'appareil par le contenu de la sauvegarde. Sauvegardez donc l'état actuel avant d'importer une sauvegarde plus ancienne. Vos données résidant uniquement sur l'appareil, des sauvegardes régulières sont la seule protection contre leur perte.</div>
 
   <p><strong>Remarque :</strong> Nebenkosten ne fournit aucun conseil fiscal ou juridique. En tant que bailleur, vous êtes seul responsable de l'exactitude du contenu et de la conformité juridique des décomptes de charges que vous établissez.</p>
